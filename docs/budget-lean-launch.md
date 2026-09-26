@@ -6,9 +6,13 @@
 
 ## 0. The answer in one line
 
-**You can launch properly for about ₹20,000 one-time plus ₹5,000–10,000/month**, if the founders record the voice and edit the videos themselves. That's roughly **₹50,000–80,000 for the first 6 months.** SEBI Research Analyst registration adds about **₹35,000–45,000 in fees and a legal check**, plus a **₹1 lakh fixed deposit** that is locked (as a lien), not spent. It's only needed when we start company-specific views (month 3–6).
+**Voice-first plan (founders record and edit):** about **₹6,000–11,000 one-time plus ₹2,000–10,000/month**, roughly **₹40,000–60,000 for the first 6 months** (see the ultra-lean scenario in §7).
 
-The biggest cost is **founder time**, not money. The biggest optional money cost is a **video editor**.
+**Digital-twin plan (your AI face and voice, automated videos; the chosen direction, see §9):** about **₹8,500–14,500 one-time plus ₹7,000–24,000/month**, roughly **₹80,000–1,10,000 for the first 6 months**. No video editor needed, because the pipeline does the editing.
+
+In both plans, SEBI Research Analyst registration later adds about **₹28,000–45,000 in fees and a legal check**, plus a **₹1 lakh fixed deposit** that is locked (as a lien), not spent. It's only needed when we start company-specific views (month 3–6).
+
+The biggest cost is **founder time**, not money.
 
 ---
 
@@ -16,8 +20,8 @@ The biggest cost is **founder time**, not money. The biggest optional money cost
 
 | Skip for now | Why | Free substitute |
 |---|---|---|
-| AI avatar subscription (HeyGen etc.) | Our format is voice + visuals + documents. A face isn't needed to launch, and it's a policy risk for finance | Founder's own voice over charts and documents |
-| Hindi AI voice (ElevenLabs etc.) | The founder's own Hindi voice is more natural and more trusted, and it's free | Record yourself |
+| AI avatar subscription (HeyGen etc.) | *Voice-first plan only.* In the chosen digital-twin plan this becomes a core cost (§9), using **your own** face with disclosure, never a fictional persona | Founder's own voice over charts and documents |
+| Hindi AI voice (ElevenLabs etc.) | *Voice-first plan only.* In the digital-twin plan we clone **your** voice (§9) | Record yourself |
 | English dubbing service | YouTube offers **free auto-dubbing and multi-language audio tracks** | YouTube's built-in dubbing (check that Hindi→English works for our channel; disclose that it's AI-dubbed) |
 | Paid news feeds (Reuters, Bloomberg) | Expensive; we use primary sources anyway | SEBI/RBI/IRDAI/NSE/BSE websites, PIB, MoSPI API, FRED, GDELT (all free) |
 | Paid market-data license | Needed for redistribution and for the automated product, not for the first 10 videos | Free official sources for research; licensed charts later (see §4) |
@@ -142,6 +146,40 @@ The **recommended lean** plan fits the ₹50k–1.5L MVP range discussed earlier
 
 ---
 
+## 9. Digital-twin plan (chosen direction, 26 Sep 2026)
+
+The founder's face and voice are cloned once, and videos are produced by the automated pipeline in [`automated-video-pipeline.md`](automated-video-pipeline.md). This replaces the video-editor cost with tool subscriptions.
+
+### One-time
+| Item | Cost (approx.) |
+|---|---|
+| Microphone + pop filter | ₹4,000–8,000 |
+| Soft light for the twin recording (a 4K-capable phone is enough as the camera) | ₹2,000–4,000 |
+| Domain | ₹800–1,200/year |
+| NISM Series XV exam | ₹1,500 |
+| **Total** | **₹8,500–14,500** |
+
+### Monthly
+| Item | Months 1–2 (build + test) | Months 3–6, semi-automatic | Months 3–6, fully automatic |
+|---|---|---|---|
+| Claude (Pro subscription → API) | ~₹2,000 | ~₹6,500–9,000 | ~₹6,500–9,000 |
+| ElevenLabs Creator (voice clone) | ~₹2,000 | ~₹2,000 | ~₹2,000+ |
+| HeyGen (avatar) | ~₹2,550 (Creator) | ~₹2,550 (Creator) | ~₹8,700–11,000+ (API/higher tier; confirm pricing) |
+| Server / rendering | ₹0 (laptop) | ~₹500–1,000 | ~₹2,000–3,500 |
+| Canva Pro | ~₹333 | ~₹333 | ~₹333 |
+| **Total** | **~₹7,000** | **~₹12,000–15,000** | **~₹20,000–26,000** |
+
+### Six-month total
+| Path | Total (approx.) |
+|---|---|
+| Semi-automatic all six months | **~₹80,000–90,000** |
+| Semi-automatic → fully automatic from month 4 | **~₹1,00,000–1,10,000** |
+| Either path + SEBI RA fees and legal consult (month 4–6) | **+ ₹28,000–45,000** (+ ₹1 lakh FD lien, locked) |
+
+**Spend gate for going fully automatic:** the semi-automatic pipeline has shipped 8+ videos, and the manual avatar step is the main bottleneck.
+
+---
+
 ## Sources
 
 - [SEBI RA deposit requirement (LexiBox)](https://www.lexibox.in/ra/deposit-requirement-for-research-analysts-ras/) · [Compliance Calendar: deposit in place of net worth](https://www.compliancecalendar.in/learn/deposit-requirement-in-place-of-net-worth-certificate-for-research-analysts-ras)
@@ -152,3 +190,4 @@ The **recommended lean** plan fits the ₹50k–1.5L MVP range discussed earlier
 - [TrueData pricing page](https://www.truedata.in/price) · [NSE paid EOD/historical data](https://www.nseindia.com/static/market-data/eod-historical-data-subscription)
 - [TechCrunch: YouTube multi-language audio for all creators](https://techcrunch.com/2025/09/10/youtubes-multi-language-audio-feature-for-dubbing-videos-rolls-out-to-all-creators/)
 - Claude API prices: Anthropic's current model pricing (Haiku 4.5, Sonnet 5, Opus 5)
+- Digital-twin tool pricing (HeyGen, ElevenLabs, Remotion): see the sources in [`automated-video-pipeline.md`](automated-video-pipeline.md)
