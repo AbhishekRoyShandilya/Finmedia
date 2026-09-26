@@ -209,6 +209,8 @@ The compliance gate isn't overhead. The records it produces are exactly what SEB
 
 ## 7. MVP stack and budget (₹50k–₹1.5L range)
 
+> **Update (26 Sep 2026):** superseded by the detailed low-budget plan in [`budget-lean-launch.md`](budget-lean-launch.md) (voice-first launch, no avatar, free data and tools first, spend unlocked by results).
+
 | Layer | Suggested tools | Approx. monthly cost |
 |---|---|---|
 | Avatar / twin | HeyGen (Creator $29, Pro $99, Business $149 + seats) or Synthesia ($18–$89) | ₹2.5k–₹12.5k |
