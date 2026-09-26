@@ -101,7 +101,7 @@ This genre (gold-and-silver crisis media) often leans on **mystery and fear inst
 - **Honest about uncertainty.** "We don't know yet" said calmly is a power move.
 
 ### Delivery specs
-- **Pace:** ~130–145 words/min for English long-form; a little faster (~150–160) for Reels.
+- **Pace:** calm, about 10–15% slower than normal conversation for long-form (for the English track, ~130–145 words/min); a little faster for Reels.
 - **Pauses:** a 0.5–1 s pause *before* every key number or reveal, marked `[beat]` in scripts.
 - **Pitch:** low and steady. Energy rises only at the turn (section 3).
 - **Sentences:** mostly short. One idea each. Occasionally one long sentence to build tension, then a short one to land it.
@@ -120,8 +120,8 @@ This genre (gold-and-silver crisis media) often leans on **mystery and fear inst
 | "Quietly," "notice," "look closer," "follow the money" | "Crash!!", "BOOM," "multibagger," "rocket," "jackpot" |
 
 ### Language strategy
-- **English flagship** (highest ad rates, premium audience) with **Hindi / Hinglish versions** (AI-dubbed and disclosed, or re-voiced) for reach.
-- Hinglish keeps the same calm register. Don't slip into the loud "bhai log" register of trading Telegram.
+- **Hindi-first (decided 26 Sep 2026):** Hindi with English financial terms, the way people actually talk about money in India. **English is a secondary audio track** on the same video. Full rules are in [`hindi-script-guide.md`](hindi-script-guide.md).
+- Hindi keeps the same calm register. Don't slip into the loud "bhai log" register of trading Telegram.
 
 ---
 
@@ -200,11 +200,8 @@ Rules: a specific number or date where possible; no ALL CAPS; no "SHOCKING"; the
 > Almost all of that profit was made by machines.
 > This is the story of the largest quiet transfer of money in Indian markets, and the few places where individuals still have the edge.
 
-### C. The Transfer (Hinglish)
-> Financial year 2024 mein, India ke individual traders ne derivatives mein costs se pehle, lagbhag 61 hazaar crore rupaye gawaye. [beat]
-> Aur usi saal, proprietary firms aur foreign investors ne kamaye… [beat] lagbhag utne hi.
-> Aur us munafe ka lagbhag saara hissa, machines ne banaya tha.
-> Yeh kahani hai Indian market ke sabse bade, sabse shaant transfer ki, aur un jagahon ki jahan aam investor ke paas aaj bhi edge hai.
+### C. Hindi versions (primary language)
+The Hindi-first cold opens (The Transfer, IRDAI, Crude vs Petrol) are in [`hindi-script-guide.md`](hindi-script-guide.md#8-sample-cold-opens-hindi-first). The English versions above are for the English audio track.
 
 ---
 

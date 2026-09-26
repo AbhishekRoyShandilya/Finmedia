@@ -126,8 +126,9 @@ Every event video should be built so it keeps getting found after the news fades
 
 ### 3f. Language: the biggest multiplier we have
 
-- YouTube's **multi-language audio** (rolled out to all creators from Sep 2025, with expressive AI dubbing in Hindi from early 2026) lets **one video carry English + Hindi audio tracks**. YouTube reports that creators using it got **over 25% of watch time from the non-primary language** on average.
-- **Recommendation:** produce every flagship in **English with a Hindi track** (human-voiced for flagships, AI-dubbed and disclosed for the daily desk). Hindi is where the volume is; English is where the higher ad rates are. One upload collects both.
+- **Decision: Hindi-first.** Hindi with English financial terms is the primary language, because understanding comes first. A viewer who feels they're not fully getting it leaves. Rules are in [`hindi-script-guide.md`](hindi-script-guide.md).
+- YouTube's **multi-language audio** (rolled out to all creators from Sep 2025, with expressive AI dubbing including Hindi from early 2026) lets **one video carry Hindi + English audio tracks**. YouTube reports that creators using it got **over 25% of watch time from the non-primary language** on average.
+- So every flagship ships with **Hindi primary + an English secondary track** (AI-dubbed and disclosed for the daily desk; human-voiced for big flagships). Hindi brings the volume; the English track recovers part of the higher-ad-rate English audience. One upload collects both.
 - Later: Tamil, Telugu and Marathi tracks for the biggest videos.
 
 ### 3g. Distribution
@@ -150,7 +151,7 @@ Every event video should be built so it keeps getting found after the news fades
 | **Viewers still watching at 30 s** | Is the hook working? This is the most fixable metric |
 | **Average % viewed** (target ≥ 40% on flagships) | Is the script working? |
 | **Returning viewers** | Are we building an audience or renting one? |
-| **Non-primary-language watch time** | Is the Hindi track pulling its weight? |
+| **Non-primary-language watch time** | Is the English track pulling its weight? |
 | **Newsletter/WhatsApp sign-ups per 1,000 views** | Is it building the business, not just views? |
 
 ---
