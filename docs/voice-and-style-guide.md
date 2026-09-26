@@ -8,7 +8,7 @@
 
 **Which channel:** [**The Hidden Economy (@TheHiddenEconomyTV)**](https://www.youtube.com/@TheHiddenEconomyTV/videos). Its official landing page describes it as *"precious metals & commodities with John AG."* The channel decodes the world of precious metals with a deep focus on **gold and silver**, for a mostly US audience. (Several other channels share the name, including one hosted by "Richard Coleman"; this guide is about the John AG channel.)
 
-> ⚠️ YouTube is blocked from our research environment, so we couldn't watch the videos or pull view counts. The analysis below uses video titles found through search, plus the channel's own description. **Next step:** paste transcripts of 3 of its most-viewed videos, and we'll annotate them line by line.
+> ⚠️ YouTube is blocked from our research environment, so we couldn't watch the videos or pull view counts. The analysis below uses video titles found through search, plus the channel's own description. **Update:** a full transcript (the Fed-hike video) has been annotated line by line in [`transcript-teardown-100k-playbook.md`](transcript-teardown-100k-playbook.md). The team reports the channel averages ~6–8k views per video; that doc explains why and how we design for 100k+.
 
 ### 1a. What the channel actually publishes
 
