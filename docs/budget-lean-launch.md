@@ -1,5 +1,7 @@
 # Finmedia — Lean Launch Budget
 
+*⚠️ **Current rule: all-in monthly cap of ₹10,000–12,000. See §10, which overrides the monthly figures in §3 and §9.***
+
 *For a low-budget start: spend only on what unblocks the next step, and unlock each extra spend with a result. Prepared 26 Sep 2026. Prices are approximate (converted at ~₹88/$) and should be re-checked before purchase. Supersedes the rough MVP table in [`strategy-research-2026-09.md`](strategy-research-2026-09.md) §7.*
 
 ---
@@ -179,6 +181,63 @@ The founder's face and voice are cloned once, and videos are produced by the aut
 **At full target volume (1 Reel/day + 8–10 long videos of 12–15 min):** the video layer rises to **~₹11,000–13,000/month** (HeyGen Pro or Creator + ElevenLabs Pro) if the avatar step stays semi-automatic, or **~₹19,000–23,000** fully automatic via HeyGen's API. Months 3–6 then total roughly **₹20,000–25,000/month (semi-automatic)**, bringing the six-month total to **~₹1,00,000–1,25,000** before RA costs. The detailed math is in [`automated-video-pipeline.md` §8b](automated-video-pipeline.md#8b-cost-at-our-target-volume-1-reel-a-day--810-long-videos-a-month).
 
 **Spend gate for going fully automatic:** the semi-automatic pipeline has shipped 8+ videos, and the manual avatar step is the main bottleneck.
+
+---
+
+## 10. Hard cap: ₹10,000–12,000 per month, all-in (decided 26 Sep 2026)
+
+This section **overrides** the monthly figures above. Everything (AI, voice, avatar, data, news, server, design) must fit under **₹12,000/month**, with a target of ~₹10,000.
+
+### 10a. Do we need news, report or data subscriptions? No.
+
+| Need | Paid option we **skip** | What we use instead (free) |
+|---|---|---|
+| Breaking news / event detection | Reuters, Bloomberg, paid news APIs, premium newspaper subscriptions | NSE/BSE announcement pages, SEBI/RBI/IRDAI/PIB releases, GDELT (global), Google News RSS for detection only |
+| Reports & research | Paid research databases, broker-report services | Regulator reports (SEBI studies, RBI Bulletin/FSR/annual report), company annual reports, investor presentations, earnings-call transcripts (all free on exchanges) |
+| Economic data | Paid macro terminals | MoSPI eSankhyiki API, RBI DBIE downloads, FRED, Alpha Vantage free tier |
+| Market prices | Paid data vendor license | Free official daily exchange reports for research; licensed data only after revenue |
+
+Our edge is **reading primary documents better**, not having a paid news feed. (A founder may personally keep one newspaper subscription for reading, but the pipeline doesn't need it.)
+
+### 10b. The capped monthly budget
+
+| Item | Plan | ₹/month (approx., at ₹88/$) |
+|---|---|---|
+| **LLM (Claude)** | Claude Pro subscription while semi-manual; later the API with a **hard monthly spend limit of ~$30** (strict code pre-filtering, cheapest model for triage, Opus only for flagship scripts, prompt caching) | ~1,800–2,600 |
+| **Voice clone** | ElevenLabs **Creator** ($22, ~121k credits ≈ 120 min of speech). Overage/usage billing **switched off** | ~1,950 |
+| **Avatar** | HeyGen **Creator** ($29, 600 credits ≈ 30 avatar-min at Avatar IV). Clips generated in the web app, **not** the API | ~2,550 |
+| **Server** | Small VPS for the pipeline; render videos on the founder's laptop | ~600 |
+| **Design** | Canva free (Pro ₹333 only if needed) | 0–333 |
+| **Domain** | Yearly, spread per month | ~100 |
+| **Data, news, reports** | Free sources (10a) | 0 |
+| **Buffer** (retakes, occasional extra) | Reserved, not auto-spent | ~1,500 |
+| **Total** | | **~₹8,500–9,500, + ₹1,500 buffer = ₹10,000–11,000** |
+
+### 10c. What content volume fits under the cap
+
+The voice plan (~120 minutes of speech a month) is the binding limit. So:
+- **8 long videos of ~12 min** (≈ 96 min of narration), plus
+- **30 Reels, of which ~20 are cut from the long videos** (reusing the same voice and avatar clips, so almost no extra cost) and **~10 are original** (≈ 8 min of narration).
+- **≈ 105 min of narration + ~15% retakes ≈ 120 min.** That fits ElevenLabs Creator.
+- Avatar: ~15–20% face time on long videos + ~40% on original Reels ≈ **18–22 avatar minutes ≈ 360–440 credits.** That fits HeyGen Creator's 600 (unused credits roll over one month).
+
+**Going above this** (10 long videos of 15 min each) needs ElevenLabs Pro (+ ~₹6,800/month). **Only do that once revenue covers it** (spend gate).
+
+### 10d. How we stop costs from exploding
+
+1. **Only fixed-price subscriptions or hard-capped usage.** No open-ended pay-as-you-go:
+   - set a **monthly spend limit in the Anthropic Console** for the API;
+   - keep **usage-based billing off** in ElevenLabs;
+   - HeyGen Creator can't buy extra credit packs, so it's naturally capped.
+2. **Render once.** The avatar and voice are generated **only after the script is approved** (Gate G2). Regenerate only the scenes that fail QA, never the whole video.
+3. **Code before AI.** Keyword, company-list and document-type rules drop most filings before any AI model sees them.
+4. **Right model for the job.** The cheapest model for triage; a mid model for briefs; the best model only for final flagship scripts. Cache the large stable prompts (sector packs, style guides).
+5. **Reuse.** Reels are cut from long videos wherever possible; one research brief feeds the long video, Reels, newsletter and WhatsApp post.
+6. **Weekly cost check.** Cost per video (AI tokens + voice credits + avatar credits) goes in a simple sheet. If a month is on track to pass ₹12,000, the pipeline pauses new renders until the next cycle.
+7. **Annual billing only after month 3,** once the tools are proven (roughly 15–20% cheaper, but it needs cash up front).
+
+### 10e. One-time costs (unchanged)
+Mic, soft light, domain and NISM exam: **~₹8,500–14,500 one-time**. SEBI RA fees and legal review (~₹28,000–45,000) and the ₹1 lakh FD lien come **later**, as separate one-time costs when the RA gate is met, not from the monthly cap.
 
 ---
 

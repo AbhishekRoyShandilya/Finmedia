@@ -236,6 +236,8 @@ Visual types: `AVATAR`, `CHART`, `DOC_RECEIPT`, `ANIMATION` (reusable templates:
 
 **Recommendation:** keep the **avatar step semi-automatic** (generate the clips in HeyGen's web app from our finished audio, ~5 minutes per video) until revenue justifies API pricing. Everything else stays automatic. Also ask HeyGen whether web-plan credits can be used through the API. If they can, full automation costs about the same as the web app.
 
+**Budget cap (decided 26 Sep 2026):** the all-in monthly cap is ₹10,000–12,000. At that cap we run HeyGen Creator + ElevenLabs Creator, **8 long videos of ~12 min + 30 Reels (≈20 cut from long videos)**. See [`budget-lean-launch.md`](budget-lean-launch.md) §10.
+
 **Ramp-up:** in months 1–2 (fewer long videos while we test), HeyGen Creator + ElevenLabs Creator ≈ $51 (≈ ₹4,500) is enough.
 
 ---
