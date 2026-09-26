@@ -155,11 +155,11 @@ The founder's face and voice are cloned once, and videos are produced by the aut
 ### One-time
 | Item | Cost (approx.) |
 |---|---|
-| Microphone + pop filter | ₹4,000–8,000 |
-| Soft light for the twin recording (a 4K-capable phone is enough as the camera) | ₹2,000–4,000 |
+| Microphone + pop filter (**optional**: used only for the one-time voice-clone recording; try a quiet room + phone or earphone mic first) | ₹0–8,000 |
+| Soft light for the one-time twin recording (**optional**: soft daylight from a window works; a 4K-capable phone is enough as the camera) | ₹0–4,000 |
 | Domain | ₹800–1,200/year |
 | NISM Series XV exam | ₹1,500 |
-| **Total** | **₹8,500–14,500** |
+| **Total** | **₹2,300–14,500** (mic and light only if the free test recording isn't clean) |
 
 ### Monthly
 | Item | Months 1–2 (build + test) | Months 3–6, semi-automatic | Months 3–6, fully automatic |
@@ -237,7 +237,7 @@ The voice plan (~120 minutes of speech a month) is the binding limit. So:
 7. **Annual billing only after month 3,** once the tools are proven (roughly 15–20% cheaper, but it needs cash up front).
 
 ### 10e. One-time costs (unchanged)
-Mic, soft light, domain and NISM exam: **~₹8,500–14,500 one-time**. SEBI RA fees and legal review (~₹28,000–45,000) and the ₹1 lakh FD lien come **later**, as separate one-time costs when the RA gate is met, not from the monthly cap.
+Domain and NISM exam (~₹2,300), plus a mic and light **only if needed** for the one-time twin recording: **~₹2,300–14,500 one-time**. The AI videos themselves never need a mic or light. SEBI RA fees and legal review (~₹28,000–45,000) and the ₹1 lakh FD lien come **later**, as separate one-time costs when the RA gate is met, not from the monthly cap.
 
 ---
 
