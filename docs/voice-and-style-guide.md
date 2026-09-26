@@ -1,16 +1,60 @@
 # Finmedia — Voice & Style Guide
 
-*Calm, catchy, convincing, and built on deeper evidence than anyone else. Modeled on the financial-documentary style of "The Hidden Economy" and designed to beat it on research. Research date: 26 Sep 2026.*
+*Calm, catchy, convincing, and built on deeper evidence than anyone else. Modeled on the style of "The Hidden Economy" (@TheHiddenEconomyTV) and designed to beat it on research. Research date: 26 Sep 2026.*
 
 ---
 
 ## 1. The reference: "The Hidden Economy"
 
-**Which channel.** Several YouTube channels use this name. The one that matches what we're describing (a presenter-led financial documentary with an AI-looking face) is **"Richard Coleman | The Hidden Economy."** In its own words, it "exposes the forces operating beneath the surface of the global financial system": economic collapse, financial crises, bank failures, inflation, debt and control, currency manipulation, and the hidden mechanics of money, gold, silver and crypto, through "financial documentaries, investigative narratives, and data-driven insights."
+**Which channel:** [**The Hidden Economy (@TheHiddenEconomyTV)**](https://www.youtube.com/@TheHiddenEconomyTV/videos). Its official landing page describes it as *"precious metals & commodities with John AG."* The channel decodes the world of precious metals with a deep focus on **gold and silver**, for a mostly US audience. (Several other channels share the name, including one hosted by "Richard Coleman"; this guide is about the John AG channel.)
 
-Related channels with the same name follow a similar format: faceless or narrator-led, cinematic animation, "no hype, just clear storytelling, real history, and the economics behind human behavior."
+> ⚠️ YouTube is blocked from our research environment, so we couldn't watch the videos or pull view counts. The analysis below uses video titles found through search, plus the channel's own description. **Next step:** paste transcripts of 3 of its most-viewed videos, and we'll annotate them line by line.
 
-> ⚠️ YouTube is blocked from our research environment, so this analysis is based on the channels' public descriptions and the conventions of the genre, not a frame-by-frame review. **Next step:** pick 3 of their top videos and paste the transcripts. We'll annotate them line by line and tune this guide.
+### 1a. What the channel actually publishes
+
+**Titles found under the channel handle** (confirmed through search):
+- *97.9% Will Fail With Gold & Silver in the Next Crisis — Do You Know?*
+- *95% Don't Know About These Powerful Metals (5% Know The Secret)*
+- *Silver IS SETTING A TRAP — Most Investors Won't See It Forming*
+- *99% Will Lose With Gold & Silver — Are You Ready?*
+- *Stop Buying the Silver Dip: Here's What the Mainstream Is Hiding From You | John Ag* (May 2026)
+
+**Topics that appear in the same search results but that we couldn't confirm are from this channel:** central-bank gold buying ("What Do Central Banks Know That You Don't?"), silver market stress, gold/silver crash explainers, and underground/black-market economies.
+
+**Observations:**
+- **One niche, covered deeply and often.** Gold and silver, again and again, from many angles: crisis, central banks, "traps," dips. The audience comes back because the channel is *the* place for that one topic.
+- **The presenter is a persona.** "Ag" is the chemical symbol for silver, so "John AG" is very likely a brand character, not a legal name. You've noted the face looks AI-generated. If so, that's the exact pattern YouTube said in Jul 2026 it won't monetize for finance: *AI personas giving financial advice.* Channels like this carry a platform risk we deliberately avoid.
+- **Calm delivery under alarming titles.** The titles create fear or FOMO; the calm narration makes the fear feel credible rather than hysterical. That contrast is the core of the style.
+
+### 1b. The title formula, decoded
+
+| Element | Example | Why it works |
+|---|---|---|
+| **The "X% will fail" split** | "97.9% Will Fail…", "99% Will Lose…" | Splits the audience into losers and the few who know. Viewers click to join the winning minority |
+| **The secret minority** | "(5% Know The Secret)" | Exclusivity; watching the video feels like earning insider status |
+| **The trap** | "Silver IS SETTING A TRAP" | Loss aversion. Avoiding a loss motivates more than a promised gain |
+| **The hidden-truth frame** | "What the Mainstream Is Hiding From You" | Positions the channel as the only honest source |
+| **The direct question** | "Do You Know?", "Are You Ready?" | Makes it personal; implies the viewer probably isn't ready |
+| **Fake precision** | "97.9%" | An oddly exact number feels researched, **but nobody can verify where it comes from** |
+
+**Our edge in one sentence:** their percentages are invented; **ours come from SEBI.** Indian regulators have published exactly the kind of "X% lose" statistics this formula runs on, and they're real:
+- *"91% Lost Money in F&O Last Year. We Traced Where the Money Went."* (SEBI FY25 study: over 91% lost)
+- *"99% of the Winners Were Machines."* (SEBI FY26: 99% of prop and FPI profits came from algo entities)
+- *"93% of Young Traders Lost. Here's What the Data Says About the Rest."* (SEBI FY22–FY24 study)
+- *"62% of Investors Follow Finfluencers. Only 6% of Finfluencers Are Registered."* (SEBI survey; CFA Institute 2026)
+
+That's the same psychological pull, with a verifiable source on screen.
+
+### 1c. A niche lesson we should copy
+
+Their success comes from **owning one asset class deeply**. Gold and silver matter even more in India, where households have always stored wealth in gold. A dedicated recurring franchise, **"The Gold Desk (India),"** is worth testing. Topics could include:
+- gold/silver ETF and fund flows (AMFI data);
+- RBI's gold reserves (RBI data);
+- import duty changes (Budget);
+- the rupee–gold relationship;
+- how Indian gold investment options compare (physical, ETFs, funds, GIFT City, and RBI's tokenized-gold exploration).
+
+Build the research the same way as every other format: official data first, historical base rates second. Verify every figure before publishing. None of this has been researched yet.
 
 ### What makes that style work
 
@@ -30,10 +74,11 @@ The feeling of *"he knows something deeper that I don't, and I need to keep list
 
 ### Where that genre is weak, and where we win
 
-The "hidden forces" genre often leans on **mystery instead of evidence**: "they don't want you to know," collapse fear, unnamed "elites," few sources shown on screen. It *feels* deep, but viewers can't verify it. We'll use the same storytelling techniques, backed by stronger evidence:
+This genre (gold-and-silver crisis media) often leans on **mystery and fear instead of evidence**: "the mainstream is hiding it," "the next crisis," invented percentages, few sources on screen. It *feels* deep, but viewers can't verify it. We'll use the same storytelling techniques, backed by stronger evidence:
 
 | They (genre typical) | Us |
 |---|---|
+| Invented precision ("97.9% will fail") | **Real statistics from SEBI/RBI studies**, with the source on screen |
 | Authority from mystery | **Authority from receipts.** The actual document is highlighted on screen |
 | "Experts say…" | Named source, page number, date |
 | Averages and dramatic single examples | **N, median and range** ("in 23 cases…") |
@@ -120,7 +165,10 @@ Cold open (the event, the timestamp) → what changed (the document) → who is 
 - *99% of the Winners Were Machines*
 - *What Happened the Last 23 Times India Did This*
 
-Rules: a specific number or date where possible; no ALL CAPS; no "SHOCKING"; the title must be literally true and substantiated in the video.
+- *91% Lost Money in F&O Last Year. We Traced Where the Money Went.* (the "X%" split, with a real source)
+- *The Trap Inside Expiry-Day Options: 59% of Trading, and Who's on the Other Side*
+
+Rules: a specific number or date where possible; no ALL CAPS; no "SHOCKING"; the title must be literally true and substantiated in the video. **Every percentage in a title must come from a named official study, and that study must be shown on screen within the first 60 seconds.**
 
 **Thumbnail language:** dark, cinematic background; one highlighted document excerpt or one number; at most 3–4 words; a muted palette with one accent color (our brand color) on the key element. When the real presenter appears, the expression is calm and focused, never a shocked face.
 
@@ -188,8 +236,8 @@ Rules: a specific number or date where possible; no ALL CAPS; no "SHOCKING"; the
 
 ## Sources
 
-- [Richard Coleman | The Hidden Economy (YouTube, about page)](https://www.youtube.com/channel/UCUpBBhvwIuZ7AtvsIOEQKeg/about)
-- [The Hidden Economy (YouTube)](https://www.youtube.com/channel/UCVZMjqRJRO5bxjnbdWtPhkg)
-- [Hidden Economy TV (YouTube)](https://www.youtube.com/@HiddenEconomyTV)
-- [The Hidden Economy TV (YouTube)](https://www.youtube.com/channel/UC3wO7VeTRP2jL_jkxLlUCpw)
+- [The Hidden Economy (@TheHiddenEconomyTV), the reference channel](https://www.youtube.com/@TheHiddenEconomyTV/videos)
+- [The channel's landing-page repository ("precious metals & commodities with John AG")](https://github.com/hiddeneconomy/the-hidden-economy-site)
+- Videos: [97.9% Will Fail With Gold & Silver…](https://www.youtube.com/watch?v=ZHnsQRbH058) · [95% Don't Know About These Powerful Metals…](https://www.youtube.com/watch?v=xO534rPqshg) · [Silver IS SETTING A TRAP…](https://www.youtube.com/watch?v=qSSvvAxxI5M) · [99% Will Lose With Gold & Silver…](https://www.youtube.com/watch?v=daGRbXQG95M) · [Stop Buying the Silver Dip… | John Ag](https://www.youtube.com/watch?v=ndZLB1ClrsQ)
+- Other channels with the same name (not the reference): [Richard Coleman | The Hidden Economy](https://www.youtube.com/channel/UCUpBBhvwIuZ7AtvsIOEQKeg/about) · [The Hidden Economy](https://www.youtube.com/channel/UCVZMjqRJRO5bxjnbdWtPhkg)
 - YouTube inauthentic-content policy (Jul 2026) and the SEBI data used in the sample cold opens: see the source lists in [`strategy-research-2026-09.md`](strategy-research-2026-09.md) and [`next-gen-finance-pillar.md`](next-gen-finance-pillar.md).
