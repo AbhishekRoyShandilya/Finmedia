@@ -193,6 +193,51 @@ Visual types: `AVATAR`, `CHART`, `DOC_RECEIPT`, `ANIMATION` (reusable templates:
 
 **Avatar-minute check:** 1 flagship (18 min) + 2 desks (8 min) a week ≈ 34 min/week ≈ 140 min/month of video. At ~20% avatar share that's **~28 avatar minutes/month**, which fits the Creator plan's ~30 minutes. More videos, or more avatar time, means a higher tier.
 
+### 8b. Cost at our target volume: 1 Reel a day + 8–10 long videos a month
+
+**Volume:**
+- 30 Reels × ~50 s ≈ **25 min**
+- 8–10 long videos × 12–15 min ≈ **96–150 min**
+- **Total ≈ 120–175 minutes of finished video a month**
+
+**What HeyGen charges (Sep 2026; confirm on the pricing page before buying):**
+
+| Item | Price |
+|---|---|
+| Creator plan | $29/month for 600 credits |
+| Pro plan | from $49/month for 1,000 credits, with higher credit tiers available (≈ $0.045–0.05 per credit) |
+| Avatar IV/V (realistic, our choice) | **20 credits per minute** (≈ $1/min on Pro) |
+| Avatar III (older, less realistic) | ~3 credits per minute |
+| API (for full automation) | Billed separately at roughly **$1–4 per generated minute** depending on the avatar engine. **Much more expensive than web-plan credits** |
+| Unused monthly credits | Roll over for one more month |
+
+**Avatar minutes needed, by how much of the video shows your face:**
+
+| Face on screen | Avatar minutes / month | HeyGen credits | HeyGen via web app | HeyGen via API (~$4/min) |
+|---|---|---|---|---|
+| **Recommended:** ~20% of long videos, ~40% of Reels (hook + close) | ~29–40 min | ~580–800 | **Pro $49 (1,000 credits) ≈ ₹4,300** | ~$116–160 ≈ ₹10,000–14,000 |
+| Lean: ~15% of long videos, ~30% of Reels | ~22–30 min | ~440–600 | **Creator $29 ≈ ₹2,550** (tight) | ~$88–120 ≈ ₹7,700–10,500 |
+| Face for the whole runtime | ~120–175 min | ~2,400–3,500 | ~$115–175 ≈ ₹10,000–15,500 (higher Pro tier) | ~$480–700 ≈ ₹42,000–62,000 |
+
+**Voice (ElevenLabs) at this volume:** we narrate the **whole** runtime, not just the face parts.
+- Roughly 1,000 credits ≈ 1 minute of speech, so 120–175 min plus ~20% for re-takes ≈ **145–210k credits a month**.
+- The Creator plan ($22) includes ~121k credits, which is **not enough at full volume**.
+- Plan for **Pro ($99 ≈ ₹8,700, ~600k credits)**, or Creator plus overage. Check the current overage rates.
+
+**Video-layer total at target volume:**
+
+| Setup | Monthly (approx.) |
+|---|---|
+| **Recommended face mix, avatar clips generated in HeyGen's web app** (a ~5-minute manual click per video) | **HeyGen Pro $49 + ElevenLabs Pro $99 ≈ $148 ≈ ₹13,000** |
+| Lean face mix, web app | HeyGen Creator $29 + ElevenLabs Pro $99 ≈ $128 ≈ ₹11,300 |
+| Recommended face mix, **fully automatic via API** | ≈ $215–260 ≈ ₹19,000–23,000 |
+| Face for the whole runtime, web app | ≈ $215–275 ≈ ₹19,000–24,000 |
+| Face for the whole runtime, via API | ≈ $580–800 ≈ ₹51,000–70,000 |
+
+**Recommendation:** keep the **avatar step semi-automatic** (generate the clips in HeyGen's web app from our finished audio, ~5 minutes per video) until revenue justifies API pricing. Everything else stays automatic. Also ask HeyGen whether web-plan credits can be used through the API. If they can, full automation costs about the same as the web app.
+
+**Ramp-up:** in months 1–2 (fewer long videos while we test), HeyGen Creator + ElevenLabs Creator ≈ $51 (≈ ₹4,500) is enough.
+
 ---
 
 ## Sources

@@ -176,6 +176,8 @@ The founder's face and voice are cloned once, and videos are produced by the aut
 | Semi-automatic → fully automatic from month 4 | **~₹1,00,000–1,10,000** |
 | Either path + SEBI RA fees and legal consult (month 4–6) | **+ ₹28,000–45,000** (+ ₹1 lakh FD lien, locked) |
 
+**At full target volume (1 Reel/day + 8–10 long videos of 12–15 min):** the video layer rises to **~₹11,000–13,000/month** (HeyGen Pro or Creator + ElevenLabs Pro) if the avatar step stays semi-automatic, or **~₹19,000–23,000** fully automatic via HeyGen's API. Months 3–6 then total roughly **₹20,000–25,000/month (semi-automatic)**, bringing the six-month total to **~₹1,00,000–1,25,000** before RA costs. The detailed math is in [`automated-video-pipeline.md` §8b](automated-video-pipeline.md#8b-cost-at-our-target-volume-1-reel-a-day--810-long-videos-a-month).
+
 **Spend gate for going fully automatic:** the semi-automatic pipeline has shipped 8+ videos, and the manual avatar step is the main bottleneck.
 
 ---
