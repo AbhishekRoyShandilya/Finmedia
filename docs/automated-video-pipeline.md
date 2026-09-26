@@ -242,6 +242,42 @@ Visual types: `AVATAR`, `CHART`, `DOC_RECEIPT`, `ANIMATION` (reusable templates:
 
 ---
 
+## 9. Monetization risk check: your own face as an AI avatar (checked 26 Sep 2026)
+
+### 9a. Will YouTube know it's AI? Yes. Plan on it.
+- **You must declare it.** The "altered or synthetic content" disclosure is required for realistic AI faces and voices, and India's IT Rules 2026 require the declaration plus a visible label. Hiding it breaks YouTube policy and Indian law, and non-disclosure can lead to demonetization.
+- **YouTube also detects it on its own.** Since **May 2026** YouTube automatically labels videos where its systems detect significant photorealistic AI, using internal signals plus provenance metadata (C2PA Content Credentials, SynthID). The label itself doesn't reduce reach or monetization.
+- **People review it.** Partner Program reviewers watch channels, and viewers report content.
+
+**So the plan is never "they won't notice." It is: disclose, and make the content clearly the kind YouTube still pays for.**
+
+### 9b. Will YouTube monetize it? Uncertain for finance. This is the biggest open risk in the plan.
+- The **16 Jul 2026 clarification** says **"AI personas" discussing sensitive topics, including finance, are not monetizable**. Its example: *an AI podcast host giving investment advice*. Coverage of the policy describes AI personas as **"representations of real people made with AI."** That wording can include a creator's **own digital twin**.
+- YouTube **does allow creators to use their own likeness** in general (it's even building own-likeness tools for Shorts), and it says AI-assisted videos with real research and a real accountable person remain monetizable.
+- **YouTube hasn't published a clear exception for a finance creator's own digital twin.** Some creator-industry analyses report that finance/health/legal channels that automate content with AI faces are frequently demonetized.
+
+**Honest assessment:** a twin of a real, named person, delivering *research and education* (not advice or tips), fully disclosed and human-reviewed, is the *best-case* version of this format. But **YouTube ad revenue can't be guaranteed.** Treat it as a risk to test, not a certainty.
+
+### 9c. How we reduce the risk
+
+| Lever | What we do |
+|---|---|
+| **Research and education, never advice** | No buy/sell, no tips, no "you should invest in…". Explain mechanisms, data and history (this also matches our SEBI position) |
+| **Keep the avatar small** | Face ~15–25% of runtime; the rest is documents, charts and animation |
+| **A real, accountable person** | Name on screen; clear "research by [Name]"; sources in every description |
+| **Disclose everything** | Synthetic-media flag + on-screen label on every upload |
+| **Originality** | Every video carries original analysis (event studies, our data), never template filler |
+| **Optional real presence** | Occasional real recordings (a monthly live Q&A, or a short real clip) strengthen the "real person" signal. Optional, but it helps |
+
+### 9d. Test before scaling
+
+1. Build the channel to the Partner Program thresholds with the twin format.
+2. **Apply, and watch the decision.** If approved, keep scaling.
+3. **If rejected for "inauthentic content," switch the long videos to the documentary format:** visuals + narration, no avatar. Keep the twin only where it isn't needed for monetization (e.g. Instagram Reels, WhatsApp clips). Re-apply after the channel's recent videos reflect the change.
+4. **Business plan doesn't depend on ad revenue:** subscriptions, B2B and tools are the core. Even without ad revenue, the channel's job is audience + trust → newsletter → paid research.
+
+---
+
 ## Sources
 
 - [HeyGen pricing](https://www.heygen.com/pricing) · [HeyGen API pricing explained](https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained) · [eesel: HeyGen pricing 2026 (credits, Avatar IV)](https://www.eesel.ai/blog/heygen-pricing)
@@ -249,5 +285,7 @@ Visual types: `AVATAR`, `CHART`, `DOC_RECEIPT`, `ANIMATION` (reusable templates:
 - [ElevenLabs: professional voice cloning](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning) · [ElevenLabs pricing](https://elevenlabs.io/pricing)
 - [Remotion license & pricing](https://www.remotion.dev/docs/license/pricing)
 - [YouTube Data API revision history (`containsSyntheticMedia`, Oct 2024)](https://developers.google.com/youtube/v3/revision_history) · [YouTube Help: "How this content was made" disclosures](https://support.google.com/youtube/answer/15447836?hl=en)
+- [TechCrunch: YouTube clarifies policies on AI slop, Jul 2026](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/) · [Media Copilot: YouTube tightens monetization rules around AI slop](https://mediacopilot.ai/youtube-ai-slop-monetization-policy/) · [LensPOV: will AI content get you demonetized](https://lenspov.com/articles/youtube-ai-content-demonetization-2026) · [ScaleLab: YouTube AI crackdown 2026](https://scalelab.com/en/why-youtube-is-cracking-down-on-ai-generated-content-in-2026)
+- [TechCrunch: YouTube will now automatically label AI videos, May 2026](https://techcrunch.com/2026/05/27/youtube-will-now-automatically-label-ai-videos/) · [Variety: YouTube automatic AI labels](https://variety.com/2026/digital/news/youtube-ai-video-labels-automatic-detection-1236758865/)
 - [Phyllo: Instagram Reels API guide 2026](https://www.getphyllo.com/post/a-complete-guide-to-the-instagram-reels-api)
 - YouTube Jul 2026 inauthentic-content policy and India's IT Rules 2026: see [`strategy-research-2026-09.md`](strategy-research-2026-09.md)
