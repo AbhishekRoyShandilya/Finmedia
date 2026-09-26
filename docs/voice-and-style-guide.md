@@ -95,6 +95,7 @@ This genre (gold-and-silver crisis media) often leans on **mystery and fear inst
 ## 2. The house voice
 
 ### Personality
+- **An expert explaining, never an anchor announcing.** It should feel like a top researcher talking to one smart friend, starting from daily life (the petrol pump, the EMI SMS), not a news presenter reading headlines. Rules, banned anchor phrases and the "anchor test" are in [`hindi-script-guide.md` §2a](hindi-script-guide.md#2a-expert-not-anchor-the-most-important-rule-in-this-guide).
 - **Calm, certain, a little understated.** Like someone who read the 140-page circular so you don't have to, and found the one paragraph that matters.
 - **Never hypes. Never begs.** No "SMASH that like button," no "this will SHOCK you."
 - **Respects the viewer's intelligence.** Explains mechanisms, doesn't define textbook terms unless the story needs it.

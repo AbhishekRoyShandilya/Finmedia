@@ -30,6 +30,83 @@ We speak the way an educated Indian explains money at the dinner table: Hindi se
 
 ---
 
+## 2a. Expert, not anchor (the most important rule in this guide)
+
+Our voice must **never sound like a news anchor** (the CNBC Awaaz / TV-debate style). It should feel like **a top researcher explaining something to one smart friend across a chai table**, starting from things people see in daily life.
+
+### The difference
+
+| News anchor ❌ | Top expert ✅ (us) |
+|---|---|
+| **Announces** ("बड़ी ख़बर! IRDAI ने…") | **Wonders and explains** ("एक बात हमें शुरू में अजीब लगी…") |
+| Tells **what** happened | Explains **why** it happened and **what it means for you**. "What happened" is ≤ 10% of the runtime |
+| Starts from the headline | **Starts from daily life**: the petrol pump, the EMI SMS, the phone number an app asked for, gold bought for a wedding |
+| Passive, formal ("बताया जा रहा है," "किया गया है") | Active, reasoning out loud ("देखिए, बात असल में ये है…") |
+| Talks to "दर्शक" (a crowd) | Talks to **one person** ("आप") |
+| Same high energy in every sentence | Calm; energy varies; **slows down for the important part** |
+| Staccato rhythm, stress on every noun | Conversational rhythm, pauses in the *middle* of a thought |
+| Inflated adjectives ("हाहाकार," "भूचाल," "ज़बरदस्त तेज़ी") | Precise numbers ("36 percent: इतनी गिरावट एक दिन में कम देखने मिलती है") |
+| "सूत्रों के मुताबिक," "experts का मानना है" | Names the source ("IRDAI के document के page 14 पर…") |
+| Visuals: ticker, "BREAKING" band, flashing red/green, whoosh sounds | Visuals: a desk, documents, hand-drawn diagrams, calm charts |
+| Ends: "बने रहिए हमारे साथ" | Ends with a thought the viewer carries into their life ("अगली बार जब आप petrol भरवाएँ…") |
+
+### Banned anchor phrases, and what to say instead
+
+| ❌ Never | ✅ Instead |
+|---|---|
+| "जी हाँ, आपने सही सुना" | (Delete it. Just say the thing.) |
+| "आपको बता दें कि…" / "गौरतलब है कि…" | "दिलचस्प बात ये है कि…", or simply state it |
+| "बड़ी ख़बर," "Breaking," "ताज़ा अपडेट" | Never. We're not first with news; we're deepest on meaning |
+| "आइए जानते हैं," "आइए नज़र डालते हैं" | "पर असली सवाल ये है…" |
+| "बाज़ार में हाहाकार / भूचाल / कोहराम" | Describe the actual number and why it's unusual |
+| "निवेशकों के डूबे लाखों करोड़" | "एक दिन में company की value इतने करोड़ कम हो गई. पर ये पैसा 'डूबा' नहीं. ये समझना ज़रूरी है कि असल में हुआ क्या." (It becomes an explainer moment) |
+| "रॉकेट बना शेयर," "ज़बरदस्त तेज़ी" | "Share 12 percent चढ़ा. सवाल ये है कि क्यों." |
+| "सूत्रों के मुताबिक," "experts का मानना है" | Name who said it, or "हमारा data ये कहता है" |
+| "दर्शकों," "दोस्तों" (every other line) | "आप" |
+| "बने रहिए हमारे साथ," "देखते रहिए" | A closing thought, plus a pointer to the next investigation |
+
+### Seven conversational expert devices
+
+1. **Open from daily life, not the headline.** "पिछली बार जब आपने petrol भरवाया था… क्या meter पर दाम देखा था?"
+2. **Think out loud.** "जब हमने ये document पढ़ा, तो पहली बार में हमें भी यही लगा था… फिर page 14 पर एक line मिली."
+3. **Everyday Indian analogies:**
+   - **Toll plaza** for a fixed per-litre tax (the toll doesn't depend on your car's price);
+   - **IRCTC Tatkal** for why algos win on speed;
+   - **Sabzi mandi / kirana** for how prices and market makers work;
+   - **cricket DRS** for honest backtesting;
+   - **the society maintenance bill** for fund expense ratios.
+4. **Voice the viewer's question.** "अब आप सोच रहे होंगे: तो फिर सरकार tax घटाती क्यों नहीं?"
+5. **Admit surprise or uncertainty.** "सच कहें तो, ये हमें भी नहीं पता था." "ये अभी proposal है. Final क्या होगा, कोई नहीं जानता."
+6. **Make it personal with real rupees.** "मान लीजिए आपकी ₹10,000 महीने की SIP है…"
+7. **Natural connectors, used sparingly:** "देखिए," "मतलब," "यानी," "असल में," "अब यहाँ interesting चीज़ है." Use each at most about once a minute, or it becomes a verbal habit.
+
+### Voice direction (for the human voice artist and the AI voice)
+
+- Imagine **one smart friend sitting across the table**, not a camera or a crowd.
+- Pitch rises and falls naturally. **No fixed "announcement" melody** where every sentence ends with the same heavy stress.
+- Pause *inside* thoughts ("और फिर… page 14 पर एक line मिली"), not only at full stops.
+- A little warmth in the daily-life parts; **slower and lower** for the key insight.
+- Record close to the mic in a quiet room (podcast feel). No news-studio reverb, no stinger music, no "whoosh" transitions.
+- For AI voices: pick a **conversational/podcast-style voice**, never a "newsreader" preset. Use expressive speech settings.
+
+### The anchor test (quality check before publishing)
+
+1. **The chai-stall test (writer):** read every line aloud. *Would you say this sentence to a friend at a chai stall?* If not, rewrite it.
+2. **The listener test (team):** play the first 30 seconds to 5 people who didn't work on it and ask: *"ये news है, या कोई समझा रहा है?"* ("Is this news, or is someone explaining?") If **2 or more** say "news," rewrite or re-record.
+
+### Same story, two ways
+
+**❌ Anchor version (what we never do):**
+> बड़ी ख़बर! IRDAI के नए proposal से insurance बाज़ार में हाहाकार! PB Fintech का शेयर 36% टूटा, निवेशकों के डूबे हज़ारों करोड़। आइए जानते हैं पूरी ख़बर।
+
+**✅ Expert version (us):**
+> अगर आपने कभी किसी website पर insurance plans compare किए हैं… तो शायद एक चीज़ notice की होगी। Plans दिखाने से पहले, वो आपका phone number माँगते हैं। [beat]
+> ये छोटी-सी बात लगती है। पर इसी phone number के पीछे एक पूरा business model खड़ा है।
+> 23 सितंबर की शाम, IRDAI ने एक proposal निकाला, जो इसी model के हिसाब-किताब को छूता है। [VERIFY: whether the paper restricts collecting contact details before showing quotes; if not, open on commissions instead] और अगले दिन, इस business की सबसे बड़ी listed company का share 36 percent तक गिर गया।
+> तो असल में बदला क्या? और इसका आपके insurance पर क्या असर होगा? चलिए, हिसाब लगाते हैं।
+
+---
+
 ## 3. Word glossary
 
 ### 3a. Keep in English (the audience already thinks in these)
@@ -110,32 +187,36 @@ The toolkit from the [transcript teardown](transcript-teardown-100k-playbook.md)
 
 ---
 
-## 8. Sample cold opens (Hindi-first)
+## 8. Sample cold opens (Hindi-first, expert voice)
+
+Every opener starts from **something the viewer has seen or felt**, then turns to the research.
 
 ### A. The Transfer
-> Financial year 2024 में, India के आम traders ने F&O में, costs से पहले ही, **61 हज़ार करोड़ रुपये** से ज़्यादा गँवाए। [beat]
-> उसी साल, बड़ी trading firms और foreign investors ने कमाए… [beat] लगभग उतने ही।
-> और उस मुनाफ़े का लगभग पूरा हिस्सा… **machines** ने कमाया था।
-> ये कहानी है Indian market के सबसे बड़े, और सबसे ख़ामोश transfer की, और उन जगहों की, जहाँ आम investor के पास आज भी edge है।
+> आपके किसी दोस्त ने, कभी न कभी, options trading का screenshot ज़रूर भेजा होगा। एक दिन में 20 हज़ार का profit… [beat]
+> पर वही दोस्त, नुकसान वाले दिन का screenshot कभी नहीं भेजता।
+> SEBI ने पूरे देश के traders का असली हिसाब जोड़ा: profit वाले दिन भी, और नुकसान वाले दिन भी।
+> Financial year 2024 में, आम traders का कुल नुकसान, costs से पहले ही, **61 हज़ार करोड़ रुपये** से ज़्यादा था। [beat]
+> और यहाँ बात दिलचस्प हो जाती है। उसी साल, बड़ी trading firms और foreign investors ने… लगभग उतना ही कमाया।
+> ये पैसा कहाँ गया, कैसे गया… और आप किस side पर खड़े हैं? यही आज की बात है।
 
 ### B. IRDAI / PB Fintech
-> 23 सितंबर की शाम। Market बंद हो चुका था। [beat]
-> India के insurance regulator, IRDAI, ने एक document जारी किया। नाम इतना boring कि शायद ही किसी ने पढ़ा हो। [beat]
-> अगले दिन दोपहर तक, India की सबसे जानी-मानी fintech companies में से एक का share **36 percent** तक गिर चुका था।
-> ये कहानी एक company की नहीं है। ये कहानी इस सवाल की है: एक customer लाने का ख़र्च आख़िर कौन उठाता है… और जब regulator कह दे कि ये ख़र्च बहुत ज़्यादा है, तब क्या होता है?
+See the expert version in section 2a above.
 
-### C. Crude सस्ता, Petrol क्यों नहीं? *(all [VERIFY] items must be confirmed from PPAC / oil company notices first)*
-> पिछले [VERIFY: अवधि] में crude oil [VERIFY: %] सस्ता हुआ। [beat]
-> हर headline ने यही कहा: अब petrol-diesel सस्ता होगा।
-> नहीं हुआ। [beat] ज़्यादातर शहरों में, एक रुपया भी नहीं।
-> और इसकी वजह तेल से कम, और तीन चीज़ों से ज़्यादा जुड़ी है: हर litre पर लगने वाला एक fixed tax, oil companies का [VERIFY: पुराने नुकसान की भरपाई वाला तर्क], और refinery का एक margin, जिसका नाम ज़्यादातर लोगों ने कभी सुना भी नहीं।
-> पहले हम आपको एक litre petrol का पूरा हिसाब दिखाते हैं, क्योंकि इसे देखने के बाद बाकी पूरी video समझ आ जाएगी।
+### C. Crude सस्ता, Petrol क्यों नहीं? *(confirm every [VERIFY] from PPAC / oil company notices first)*
+> पिछली बार जब आपने petrol भरवाया था… क्या meter पर दाम देखा था? [beat]
+> [VERIFY: पिछले X महीनों] में, दुनिया भर में crude oil [VERIFY: %] सस्ता हो चुका है। पर उस meter पर दाम… लगभग वहीं का वहीं है।
+> पहली बार जब हमने ये देखा, तो हमें भी लगा कि कहीं कुछ गड़बड़ है। फिर हमने एक litre petrol का पूरा हिसाब खोला, base price से लेकर tax तक।
+> उसमें तीन चीज़ें मिलीं, जो ये पूरी कहानी समझा देती हैं।
+> पहली चीज़: एक tax, जो बिल्कुल toll plaza की तरह काम करता है। Toll इस बात से तय नहीं होता कि आपकी गाड़ी कितनी महँगी है… और ये tax इस बात से तय नहीं होता कि crude कितना सस्ता है।
 
 ---
 
 ## 9. Pre-publish language checklist
 
 - [ ] A 16-year-old in Lucknow and a 35-year-old in Pune would both follow every sentence
+- [ ] **Passes the anchor test:** chai-stall read-aloud done; fewer than 2 of 5 listeners said "news"
+- [ ] Opens from daily life, not the headline; "what happened" is ≤ 10% of runtime
+- [ ] No banned anchor phrases (section 2a); no ticker/breaking visuals or stinger sounds
 - [ ] "आप" for the viewer, "हम" for the channel, no gendered first-person verbs
 - [ ] Every technical term used 3+ times is explained once in one Hindi line
 - [ ] Indian numbering (लाख/करोड़); one spoken number per sentence
