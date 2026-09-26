@@ -1,0 +1,347 @@
+# Finmedia event playbooks (v1, 26 Sep 2026)
+#
+# Loaded by the Triage & Router. Each news event is routed to exactly one
+# playbook, which decides which data is pulled, which agents run (in order),
+# how history is searched, what the output formats are, and the default
+# compliance tier. Design rationale: docs/intelligence-system-architecture.md
+#
+# Horizon classes:
+#   H0 = minutes to 1 day   H1 = days to weeks
+#   H2 = months to quarters H3 = years
+#
+# Compliance tiers:
+#   E  = education/research (no SEBI RA needed)
+#   M  = media/news reporting (no recommendations)
+#   RA = needs SEBI Research Analyst registration (company-specific views)
+#
+# Reaction-profile fields are HYPOTHESES until confirmed by our own event
+# studies; the Post-mortem agent updates `measured_profile` over time.
+
+version: 1
+
+defaults:
+  always_run_first: [fact_extractor]
+  always_run_last: [skeptic, verifier, compliance, storyteller, editor]
+  history:
+    windows: [T-5, T-1, T0, T+1, T+5, T+20, T+60]
+    benchmark: sector_index        # abnormal return vs sector index; also report vs NIFTY 50
+    report: [n, median, range, hit_rate, confounders]
+  human_gates: [G2_brief, G3_publish]
+
+playbooks:
+
+  - id: scheduled_data_policy
+    name: Scheduled data & policy decisions
+    examples: [RBI MPC decision, Fed decision, India CPI/IIP/GDP release, US CPI/jobs]
+    event_types: [macro.policy_decision, macro.data_release]
+    horizon: H0
+    scheduled: true
+    key_question: Actual vs expected, and did forward guidance change?
+    reaction_driver: surprise_vs_expectation
+    data:
+      - official statement / release (primary)
+      - previous statement (for wording changes)
+      - expectation proxy (economist polls if licensed; else market-implied: bond yields, OIS, options)
+      - rates, USDINR, sector indices intraday
+    agents: [sector_specialist, exposure_mapper, participant_analyst, historian, quant]
+    signature_analysis:
+      - surprise measure (actual minus expected)
+      - line-by-line statement change detection
+      - transmission map to rate-sensitive sectors (banks, NBFC, real estate, autos)
+    history_similarity: [same institution, same direction of surprise, similar rate regime]
+    reaction_profile_hypothesis:
+      speed: minutes
+      first_movers: [algos, institutions]
+      long_term_investor: Usually noise unless the rate path changes; focus on guidance.
+      trader: Speed disadvantage; the first move is mostly priced by the open.
+    outputs: [live_or_same_day_explainer, pre_market_desk, reels]
+    compliance_tier: M
+    sla_hours: 3
+
+  - id: earnings_guidance
+    name: Earnings & guidance
+    examples: [quarterly results, guidance change, earnings call commentary]
+    event_types: [corporate.results, corporate.guidance, corporate.earnings_call]
+    horizon: H0-H1
+    scheduled: true
+    key_question: Did results and guidance beat what was already priced in?
+    reaction_driver: surprise_vs_expectation_and_guidance
+    data:
+      - XBRL results (current and last 8 quarters)
+      - investor presentation, earnings call transcript (current and previous)
+      - options-implied move before results (straddle price)
+      - segment data, peer results this season
+    agents: [sector_specialist, exposure_mapper, participant_analyst, historian, quant]
+    signature_analysis:
+      - implied move vs actual move
+      - comparing this earnings call with the previous one (guidance, tone, new risks)
+      - peer read-through (2nd-order exposures)
+    history_similarity: [same company past results, same sector this season]
+    reaction_profile_hypothesis:
+      speed: minutes
+      first_movers: [algos, institutions]
+      long_term_investor: Judge the guidance change, not the headline profit.
+      trader: The gap at the open usually prices the surprise.
+    outputs: [earnings_decoded, reels]
+    compliance_tier: RA          # company-specific view; M if facts only
+    sla_hours: 24
+
+  - id: company_unscheduled
+    name: Company-specific unscheduled news
+    examples: [large order win, M&A, management change, capex, fund-raise, block deal]
+    event_types: [corporate.order, corporate.mna, corporate.management, corporate.capex, corporate.fundraise, deals.block]
+    horizon: H0-H1
+    scheduled: false
+    key_question: How big is this relative to the company, and was it already known?
+    reaction_driver: size_relative_to_company_and_novelty
+    data:
+      - exchange filing with timestamp
+      - intraday price, volume, OI around the filing
+      - bulk/block deals, insider (PIT) and takeover-code (SAST) disclosures
+      - company size (revenue, market cap), order book
+    agents: [exposure_mapper, participant_analyst, historian, quant]
+    signature_analysis:
+      - event size vs annual revenue / market cap
+      - information timeline (filing vs first price/volume change)
+      - pre-announcement drift frequency for this event type
+    history_similarity: [same event type, similar relative size, same sector]
+    reaction_profile_hypothesis:
+      speed: minutes to days
+      first_movers: [institutions, algos]
+      long_term_investor: Matters only if it changes multi-year earnings.
+      trader: Check for pre-announcement drift; late entries are often exit liquidity.
+    outputs: [market_autopsy, before_the_move, reels]
+    compliance_tier: RA
+    sla_hours: 24
+    notes: Never allege insider trading; describe observable data only.
+
+  - id: regulatory_change
+    name: Regulatory change
+    examples: [IRDAI distribution-economics consultation paper, SEBI F&O rules, RBI lending norms, TRAI tariffs]
+    event_types: [regulatory.proposal, regulatory.final, regulatory.effective, regulatory.withdrawn]
+    horizon: H1-H2
+    scheduled: false
+    key_question: Proposal or final? Which revenue lines change, and by how much?
+    reaction_driver: earnings_impact_times_probability_of_final
+    data:
+      - the regulatory document (primary) and its stage history
+      - segment revenue of exposed companies (knowledge graph)
+      - previous regulations by the same regulator and their final outcomes
+    agents: [sector_specialist, exposure_mapper, participant_analyst, historian, quant]
+    signature_analysis:
+      - stage tracking (proposal -> comments -> final -> effective)
+      - exposure as % of revenue/profit, scenario math (base / if softened / if final as proposed)
+      - historical dilution rate between proposal and final
+    history_similarity: [same regulator, same mechanism (caps, bans, disclosure), India 2010-present]
+    reaction_profile_hypothesis:
+      speed: immediate overreaction possible, then drift over weeks
+      first_movers: [everyone at once]
+      long_term_investor: Wait for the final rule; check how often proposals were diluted.
+      trader: Watch whether the stock recovers or keeps falling after day one.
+    outputs: [pre_market_desk, flagship_candidate, reels, follow_up_on_final]
+    compliance_tier: M           # RA for company-specific views
+    sla_hours: 3
+    follow_ups: [comment deadline, final regulation, effective date]
+
+  - id: fiscal_structural_policy
+    name: Fiscal & structural policy
+    examples: [Union Budget, PLI schemes, tax regime change, government capex program]
+    event_types: [fiscal.budget, fiscal.tax, policy.scheme, policy.capex]
+    horizon: H1-H3
+    scheduled: partly
+    key_question: Money announced vs money actually spent, and who really benefits?
+    reaction_driver: credibility_of_execution_and_earnings_flow
+    data:
+      - budget documents, scheme notifications, Finance Act
+      - past allocations vs actual disbursements
+      - beneficiary companies' order books and capacity
+    agents: [sector_specialist, exposure_mapper, historian, quant]
+    signature_analysis:
+      - allocation vs disbursement history for similar schemes
+      - beneficiary mapping via the value chain
+      - multi-year order-flow scenarios
+    history_similarity: [same ministry/scheme type, previous budgets, previous PLI cycles]
+    reaction_profile_hypothesis:
+      speed: headline spike, then years of slow fundamentals
+      first_movers: [narrative traders]
+      long_term_investor: Track money spent and orders won, not announcements.
+      trader: Headline spikes often fade.
+    outputs: [flagship_candidate, budget_day_live, reels]
+    compliance_tier: E
+    sla_hours: 72
+
+  - id: macro_global_transmission
+    name: Macro & global transmission
+    examples: [US yields spike, rupee move, geopolitical shock, global recession fears]
+    event_types: [global.rates, global.fx, global.geopolitics, global.growth]
+    horizon: H0-H2
+    scheduled: false
+    key_question: Through which channel does this reach Indian sectors and flows?
+    reaction_driver: transmission_channel_strength
+    data:
+      - US yields, DXY, USDINR, crude, global indices
+      - FPI daily flows, participant OI
+      - sector sensitivity history (knowledge graph TRANSMITS_TO edges)
+    agents: [sector_specialist, exposure_mapper, participant_analyst, historian, quant]
+    signature_analysis:
+      - transmission graph (e.g. Fed -> US yields -> FPI flows -> rupee -> import costs)
+      - historical sector sensitivity to similar shocks
+    history_similarity: [same shock type and size, similar global regime]
+    reaction_profile_hypothesis:
+      speed: hours to days
+      first_movers: [FPIs, algos]
+      long_term_investor: Usually noise unless it changes rates or earnings.
+      trader: Opportunities through FX/rates transmission.
+    outputs: [global_to_your_wallet_explainer, reels]
+    compliance_tier: E
+    sla_hours: 24
+
+  - id: commodity_input_shock
+    name: Commodity & input-cost shock
+    examples: [crude spike, steel/coking coal move, edible oil, gold/silver move, refinery margins]
+    event_types: [commodity.price_shock, commodity.supply_disruption]
+    horizon: H1-H2
+    scheduled: false
+    key_question: Who pays, who passes it on, and with what lag?
+    reaction_driver: margin_impact_after_pass_through
+    data:
+      - commodity prices (licensed), inventories, refining/crack margins
+      - raw-material cost share by company (annual reports)
+      - retail price data (e.g. PPAC fuel prices)
+    agents: [sector_specialist, exposure_mapper, historian, quant]
+    signature_analysis:
+      - input-cost share x price change = gross margin impact
+      - inventory lag and pricing power (pass-through history)
+      - manufacturing example chain (raw -> intermediate -> finished -> consumer price)
+    history_similarity: [same commodity, similar move size, similar demand regime]
+    reaction_profile_hypothesis:
+      speed: weeks to quarters (margin lag)
+      first_movers: [commodity desks]
+      long_term_investor: Check pricing power and pass-through, not the spike.
+      trader: Input-cost lags create windows around results.
+    outputs: [flagship_candidate, reels]
+    compliance_tier: E
+    sla_hours: 24
+
+  - id: market_structure_flows
+    name: Market structure & mechanical flows
+    examples: [index inclusion/exclusion, MSCI/FTSE rebalance, F&O rule changes, lock-in expiry, IPO supply]
+    event_types: [structure.index_change, structure.fo_rules, structure.lockin_expiry, structure.ipo_supply]
+    horizon: H0-H2
+    scheduled: true
+    key_question: Is there a mechanical, predictable flow, and how big is it vs normal volume?
+    reaction_driver: forced_flow_vs_liquidity
+    data:
+      - index methodology and announcement
+      - passive AUM tracking the index
+      - average daily traded value
+    agents: [participant_analyst, historian, quant]
+    signature_analysis:
+      - estimated passive flow / average daily value
+      - timing calendar (announcement -> effective date)
+    history_similarity: [same index provider, similar flow/liquidity ratio]
+    reaction_profile_hypothesis:
+      speed: known dates
+      first_movers: [arbitrage desks]
+      long_term_investor: Mostly irrelevant long term.
+      trader: Predictable but crowded.
+    outputs: [explainer, reels]
+    compliance_tier: E
+    sla_hours: 48
+
+  - id: corporate_actions_special
+    name: Corporate actions & special situations
+    examples: [buyback, open offer, delisting offer, rights issue, demerger]
+    event_types: [corporate.buyback, corporate.open_offer, corporate.delisting, corporate.rights, corporate.demerger]
+    horizon: H1-H2
+    scheduled: false
+    key_question: What is the math for a shareholder, including the retail-specific angle?
+    reaction_driver: offer_math_and_acceptance
+    data:
+      - offer letter / letter of offer
+      - SEBI buyback / takeover / delisting regulations, tax rules
+      - historical acceptance ratios and post-offer returns
+    agents: [historian, quant, participant_analyst]
+    signature_analysis:
+      - acceptance ratio scenarios (small-shareholder reservation where applicable)
+      - post-tax return math
+    history_similarity: [same action type, same tax regime, similar premium]
+    reaction_profile_hypothesis:
+      speed: days to weeks
+      first_movers: [special-situation investors]
+      long_term_investor: Understand the tax and acceptance math before tendering.
+      trader: Premiums compress as the record date approaches.
+    outputs: [open_windows_franchise, reels]
+    compliance_tier: E            # statistics only; RA for specific offers
+    sla_hours: 72
+
+  - id: governance_red_flags
+    name: Governance & red-flag shocks
+    examples: [auditor resignation, pledge invocation, SEBI/ED order, fraud allegation, default]
+    event_types: [governance.auditor_exit, governance.pledge, enforcement.order, credit.default]
+    horizon: H0-H2
+    scheduled: false
+    key_question: Is it on the official record, and what happened in similar cases?
+    reaction_driver: severity_and_credibility_of_source
+    data:
+      - official documents only (orders, filings, auditor letters, court records)
+      - pattern library of past cases
+    agents: [historian, quant, participant_analyst]
+    signature_analysis:
+      - red-flag pattern match against adjudicated past cases
+      - lender and ownership exposure
+    history_similarity: [same red-flag type, adjudicated outcomes only]
+    reaction_profile_hypothesis:
+      speed: immediate
+      first_movers: [institutions]
+      long_term_investor: Official red flags deserve attention; rumours don't.
+      trader: Gaps are common; liquidity can vanish.
+    outputs: [forensic_explainer_after_legal_review]
+    compliance_tier: M
+    human_gates: [G1_triage, G2_brief, legal_review, G3_publish]
+    sla_hours: 48
+    notes: Only official-record facts. No accusations beyond the record.
+
+  - id: tech_nextgen
+    name: Technology & next-gen finance
+    examples: [AI in trading, tokenization pilots, CBDC/UMI, payments innovation, EVs, semiconductors]
+    event_types: [tech.ai, tech.tokenization, tech.payments, tech.dlt, tech.industry_shift]
+    horizon: H3
+    scheduled: false
+    key_question: Who builds it, who benefits, who gets disrupted, and how should you prepare?
+    reaction_driver: adoption_stage
+    data:
+      - regulator and central-bank pilots, research papers, industry data
+      - global adoption data (e.g. tokenized RWA volumes)
+      - Indian listed exposure at sector level
+    agents: [sector_specialist, exposure_mapper, historian]
+    signature_analysis:
+      - window-model stage (rails -> builders -> products -> mainstream)
+      - value-chain map: builders, beneficiaries, disrupted
+      - skills and positioning actions for the audience
+    history_similarity: [past infrastructure shifts: demat, UPI, T+1, mobile trading]
+    reaction_profile_hypothesis:
+      speed: years
+      first_movers: [early builders]
+      long_term_investor: Prepare skills and positioning early; ignore hype spikes.
+      trader: Hype cycles; few durable trades.
+    outputs: [rails_series, investor_2030_series, build_your_own_edge]
+    compliance_tier: E
+    sla_hours: 168
+
+  - id: rumour_unverified
+    name: Rumour / unverified
+    examples: [social media claims, 'reports citing unnamed sources', forwarded tips]
+    event_types: [unverified.social, unverified.media_sources]
+    horizon: none
+    scheduled: false
+    key_question: Can it be confirmed from a primary source?
+    reaction_driver: none_until_verified
+    data: [search for primary confirmation (exchange filing, official release)]
+    agents: [verifier]
+    verification_gate:
+      if_confirmed: re-route to the matching playbook with the primary document
+      if_not_confirmed: do not publish as fact; optionally use for "noise vs signal" education
+    outputs: [none_or_noise_vs_signal_education]
+    compliance_tier: E
+    sla_hours: null
