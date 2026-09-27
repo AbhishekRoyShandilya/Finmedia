@@ -1,0 +1,45 @@
+# Document sources.
+#
+# Types:
+#   rss   - RSS/Atom feed (fetched with feedparser)
+#   gdelt - GDELT DOC 2.0 API article list (global news, used for detection only)
+#   inbox - local folder; drop official PDFs / .txt / .md files here by hand
+#
+# Before enabling a source in production, confirm the URL still works and
+# that the site's terms allow automated access. Some official sites block
+# cloud IP ranges; run the fetchers from your own machine or server.
+
+sources:
+  - id: inbox
+    type: inbox
+    enabled: true
+    category: manual
+    note: Official documents saved by hand (circulars, consultation papers, filings).
+
+  - id: sebi_rss
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: SEBI
+    url: https://www.sebi.gov.in/sebirss.xml
+
+  - id: rbi_press_releases
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: RBI
+    url: https://www.rbi.org.in/pressreleases_rss.xml
+
+  - id: rbi_notifications
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: RBI
+    url: https://www.rbi.org.in/notifications_rss.xml
+
+  - id: gdelt_india_markets
+    type: gdelt
+    enabled: false          # enable once the regulator feeds are stable
+    category: news_signal
+    query: '(sebi OR "reserve bank of india" OR irdai OR nifty OR sensex) sourcecountry:IN'
+    max_records: 50

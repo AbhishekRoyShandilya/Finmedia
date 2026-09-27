@@ -1,0 +1,14 @@
+Consultation Paper on review of framework for equity derivatives expiry
+URL: https://example.org/cp-derivatives-expiry
+
+SYNTHETIC TEST FIXTURE - NOT A REAL REGULATOR DOCUMENT.
+
+1. Background
+The regulator has observed that 59% of index options turnover occurs in same-day-expiry contracts.
+
+2. Proposal
+It is proposed that the minimum contract value for index derivatives be reviewed from Rs 15 lakh.
+It is proposed that an additional margin of 2% be levied on short options on expiry day.
+
+3. Public comments
+Comments may be submitted by 15 October 2026.

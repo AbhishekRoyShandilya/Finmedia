@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic test fixture. Not real regulator content. -->
+<rss version="2.0">
+  <channel>
+    <title>Test Regulator Feed</title>
+    <item>
+      <title>Consultation Paper on review of framework for equity derivatives expiry</title>
+      <link>https://example.org/cp-derivatives-expiry</link>
+      <description>Comments are invited on proposals relating to derivatives expiry and margin.</description>
+      <pubDate>Fri, 25 Sep 2026 18:10:00 +0530</pubDate>
+    </item>
+    <item>
+      <title>Closure of Trading Window</title>
+      <link>https://example.org/trading-window</link>
+      <description>Intimation of trading window closure for designated persons.</description>
+      <pubDate>Fri, 25 Sep 2026 12:00:00 +0530</pubDate>
+    </item>
+    <item>
+      <title>Annual sports day at regional office</title>
+      <link>https://example.org/sports-day</link>
+      <description>Staff event announcement.</description>
+      <pubDate>Thu, 24 Sep 2026 10:00:00 +0530</pubDate>
+    </item>
+  </channel>
+</rss>

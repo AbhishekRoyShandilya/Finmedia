@@ -1,0 +1,72 @@
+# Deterministic checks run on every generated script before a human sees it.
+# Sources: docs/hindi-script-guide.md (§2a expert-not-anchor, §3d, §4),
+# docs/instagram-first-launch.md (§3 visible effort), SEBI position in
+# docs/strategy-research-2026-09.md.
+
+# News-anchor phrases (Hindi + English). Any match is an error.
+banned_anchor_phrases:
+  - "जी हाँ"
+  - "आपने सही सुना"
+  - "आपको बता दें"
+  - "गौरतलब है"
+  - "बड़ी ख़बर"
+  - "बड़ी खबर"
+  - "ताज़ा अपडेट"
+  - "आइए जानते हैं"
+  - "आइए नज़र डालते हैं"
+  - "सूत्रों के मुताबिक"
+  - "हाहाकार"
+  - "भूचाल"
+  - "कोहराम"
+  - "निवेशकों के डूबे"
+  - "रॉकेट बना"
+  - "ज़बरदस्त तेज़ी"
+  - "बने रहिए हमारे साथ"
+  - "देखते रहिए"
+  - "दर्शकों"
+  - "breaking news"
+  - "shocking"
+
+# Recommendation / promise language. Any match is an error unless the
+# script is explicitly marked as RA-approved.
+recommendation_phrases:
+  - "खरीद लो"
+  - "खरीद लें"
+  - "खरीदिए"
+  - "बेच दो"
+  - "बेच दें"
+  - "बेचिए"
+  - "target price"
+  - "टारगेट प्राइस"
+  - "stop loss लगाओ"
+  - "पक्का मुनाफ़ा"
+  - "पक्का मुनाफा"
+  - "गारंटी"
+  - "guaranteed"
+  - "multibagger"
+  - "मल्टीबैगर"
+  - "पैसा डबल"
+  - "jackpot"
+  - "buy now"
+  - "sell now"
+
+# Words that count as part of a spoken number (Indian numbering).
+number_words:
+  - "हज़ार"
+  - "हजार"
+  - "लाख"
+  - "करोड़"
+  - "percent"
+  - "प्रतिशत"
+
+limits:
+  max_numbers_per_sentence: 1        # spoken numbers per sentence (warning)
+  reel_max_seconds: 90
+  reel_min_seconds: 20
+  words_per_second: 2.3              # calm Hindi delivery
+  min_non_avatar_visual_types: 2     # visible-effort rule
+  max_avatar_share: 0.5              # of scene count, for Reels
+  min_beats: 1                       # at least one [beat] pause
+
+required_disclosure_keywords:
+  - "AI"

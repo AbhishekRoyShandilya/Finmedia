@@ -1,0 +1,64 @@
+# Rule-based pre-filter. Runs before any LLM call so most documents never
+# cost money. Score = sum of matched keyword weights (case-insensitive,
+# matched against title + first part of the text). Documents scoring below
+# pipeline.prefilter_min_score are dropped.
+
+scan_chars: 4000
+
+keywords:
+  # High-signal regulatory / policy terms
+  consultation paper: 4
+  circular: 2
+  master circular: 3
+  framework: 2
+  amendment: 2
+  regulations: 2
+  monetary policy: 4
+  repo rate: 4
+  cash reserve ratio: 3
+  derivatives: 3
+  futures and options: 3
+  "f&o": 3
+  securities transaction tax: 4
+  expiry: 2
+  margin: 2
+  lot size: 3
+  algorithmic trading: 3
+  research analyst: 3
+  investment adviser: 2
+  finfluencer: 3
+  mutual fund: 2
+  insurance: 2
+  commission: 2
+  expenses of management: 3
+  tokenisation: 3
+  tokenization: 3
+  cbdc: 3
+  budget: 2
+  gst: 2
+  # Corporate events
+  buyback: 3
+  open offer: 3
+  delisting: 3
+  merger: 2
+  acquisition: 2
+  auditor: 2
+  resignation: 1
+  pledge: 2
+  default: 2
+  order win: 2
+  bulk deal: 2
+  block deal: 2
+
+# Titles containing these are routine filings; they are dropped regardless
+# of score.
+drop_if_title_contains:
+  - trading window
+  - loss of share certificate
+  - duplicate share certificate
+  - newspaper publication
+  - certificate under regulation 74(5)
+  - compliance certificate
+  - intimation of book closure
+  - change in registered office
+  - investor grievance

@@ -1,0 +1,54 @@
+# Finmedia runtime settings.
+# Secrets never go here: the Claude API key comes from the ANTHROPIC_API_KEY
+# environment variable (or an `ant auth login` profile).
+
+budget:
+  # All-in monthly cap decided 26 Sep 2026 (docs/budget-lean-launch.md §10).
+  monthly_cap_inr: 12000
+  # Share of the cap the Claude API may use. The rest is for fixed
+  # subscriptions (voice, avatar, server) recorded with `finmedia costs add`.
+  llm_cap_inr: 2600
+  usd_inr: 88.0              # conversion used for cost reporting; update monthly
+
+llm:
+  # Model per pipeline role. Defaults to Claude Opus 5 everywhere. To trade
+  # quality for cost on high-volume triage, change `triage` to
+  # claude-sonnet-5 or claude-haiku-4-5 after measuring quality.
+  models:
+    triage: claude-opus-5
+    brief: claude-opus-5
+    reel_script: claude-opus-5
+  effort:                    # low | medium | high | xhigh | max
+    triage: low
+    brief: high
+    reel_script: high
+  max_tokens:
+    triage: 2000
+    brief: 8000
+    reel_script: 8000
+  # Server-side refusal fallback (beta). Routes a declined request to a
+  # fallback model automatically. Set to false to disable.
+  refusal_fallbacks: true
+  # USD per 1M tokens (input, output). Cache writes bill at 1.25x input,
+  # cache reads at 0.1x input. Update when Anthropic pricing changes.
+  prices_usd_per_mtok:
+    claude-opus-5: [5.00, 25.00]
+    claude-opus-5-5: [4.00, 20.00]
+    claude-sonnet-5: [2.00, 10.00]
+    claude-haiku-4-5: [1.00, 5.00]
+    claude-opus-4-8: [5.00, 25.00]
+  # Characters of source document sent to each role (keeps cost bounded).
+  max_doc_chars:
+    triage: 6000
+    brief: 40000
+
+pipeline:
+  db_path: data/finmedia.db
+  output_dir: output
+  inbox_dir: data/inbox
+  # Only documents with a pre-filter score at or above this reach the LLM.
+  prefilter_min_score: 3
+  # Maximum documents triaged by the LLM per run (hard volume cap).
+  triage_limit_per_run: 25
+  # Minimum triage materiality for a document to get a research brief.
+  brief_min_materiality: 60

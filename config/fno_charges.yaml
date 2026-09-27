@@ -1,0 +1,42 @@
+# Indian equity F&O charges for the cost calculator (education use).
+#
+# Rates are fractions of the stated base (0.0005 = 0.05%). Each schedule
+# lists rates with the date they took effect; the calculator uses the
+# latest entry on or before the trade date.
+#
+# VERIFY against the latest NSE/BSE circulars and Finance Act before
+# publishing any number. Exchange transaction charges are revised from time
+# to time and differ slightly between brokers' published tables.
+
+stt:
+  # Securities Transaction Tax (charged on the SELL side).
+  futures:        # base: sell-side contract value (price x quantity)
+    - {from: "2016-06-01", rate: 0.0001}     # 0.01%
+    - {from: "2023-04-01", rate: 0.000125}   # 0.0125% (Finance Act 2023)
+    - {from: "2024-10-01", rate: 0.0002}     # 0.02%   (Finance (No.2) Act 2024)
+    - {from: "2026-04-01", rate: 0.0005}     # 0.05%   (Budget 2026)
+  options:        # base: sell-side premium (price x quantity)
+    - {from: "2016-06-01", rate: 0.0005}     # 0.05%
+    - {from: "2023-04-01", rate: 0.000625}   # 0.0625% (Finance Act 2023)
+    - {from: "2024-10-01", rate: 0.001}      # 0.10%   (Finance (No.2) Act 2024)
+    - {from: "2026-04-01", rate: 0.0015}     # 0.15%   (Budget 2026)
+
+exchange_txn:
+  # NSE transaction charges on turnover (both sides). Current values only;
+  # historical slabs are not modelled. VERIFY before use.
+  NSE:
+    futures: [{from: "2024-10-01", rate: 0.0000183}]   # ~0.00183%
+    options: [{from: "2024-10-01", rate: 0.000355}]    # ~0.0355% of premium
+
+sebi_fee:
+  rate: 0.000001            # Rs 10 per crore of turnover (both sides)
+
+stamp_duty:
+  # Charged on the BUY side.
+  futures: 0.00002          # 0.002%
+  options: 0.00003          # 0.003% of premium
+
+gst_rate: 0.18              # on brokerage + exchange charges + SEBI fee
+
+brokerage:
+  per_order_inr: 20         # typical flat discount-broker fee; change to yours

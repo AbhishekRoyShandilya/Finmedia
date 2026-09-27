@@ -1,0 +1,22 @@
+# Example input for `finmedia strategy-test config/strategy_test_example.yaml`.
+# Describes a typical viral "₹5,000 a day" options-selling claim (generic, not
+# any specific creator). Leave a field out if you don't know it.
+
+instrument: fno                 # fno | equity
+record: screenshots             # verified | broker_statement | audited | parrva | partial | trade_log | screenshots | none
+trades: 40                      # number of trades the claim is based on
+costs_included: none            # all | partial | none
+test_end_date: "2024-06-30"     # last date in the test period
+win_rate: 0.85                  # fraction of winning trades
+avg_win: 2000                   # average winning trade (₹)
+avg_loss: 9000                  # average losing trade (₹)
+max_drawdown_pct:               # worst peak-to-trough fall in %, blank if not disclosed
+tuned_parameters: 5             # entry/exit settings tuned on past data
+works_on_multiple_markets: false
+capital_required_inr: 1500000   # capital needed per the claim
+your_capital_inr: 300000        # your trading capital
+seller_incentive: paid_group    # none | course | referral | telegram | paid_group | tips_with_returns_claims | guaranteed_returns
+
+# Optional manual overrides, e.g.:
+# answers:
+#   q8_bias: green
