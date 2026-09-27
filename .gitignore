@@ -6,6 +6,8 @@ __pycache__/
 .env
 data/*
 !data/inbox/
+# curated case library (analogue event dates) is source, not generated data
+!data/cases/
 data/inbox/*
 !data/inbox/.gitkeep
 output/

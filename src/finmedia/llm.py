@@ -46,7 +46,7 @@ class LLM:
         max_tokens = int(self.cfg["max_tokens"][role])
         effort = self.cfg["effort"][role]
 
-        self.guard.check(model, len(system) + len(user), max_tokens)
+        self.guard.check(model, len(system) + len(user), max_tokens, role=role)
 
         kwargs: dict[str, Any] = dict(
             model=model,

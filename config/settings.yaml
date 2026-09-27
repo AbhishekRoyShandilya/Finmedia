@@ -8,6 +8,9 @@ budget:
   # Share of the cap the Claude API may use. The rest is for fixed
   # subscriptions (voice, avatar, server) recorded with `finmedia costs add`.
   llm_cap_inr: 2600
+  # Deep Research Desk pool (research_* roles), SEPARATE from the media cap above.
+  # PLACEHOLDER pending the owner's confirmation (plan proposed Rs10-15k/month).
+  research_llm_cap_inr: 12000
   usd_inr: 88.0              # conversion used for cost reporting; update monthly
 
 llm:
@@ -18,14 +21,29 @@ llm:
     triage: claude-opus-5
     brief: claude-opus-5
     reel_script: claude-opus-5
+    research_scoper: claude-opus-5
+    research_facts: claude-opus-5
+    research_persona: claude-opus-5
+    research_skeptic: claude-opus-5
+    research_cio: claude-opus-5
   effort:                    # low | medium | high | xhigh | max
     triage: low
     brief: high
     reel_script: high
+    research_scoper: medium
+    research_facts: medium
+    research_persona: high
+    research_skeptic: high
+    research_cio: high
   max_tokens:
     triage: 2000
     brief: 8000
     reel_script: 8000
+    research_scoper: 3000
+    research_facts: 8000
+    research_persona: 6000
+    research_skeptic: 5000
+    research_cio: 10000
   # Server-side refusal fallback (beta). Routes a declined request to a
   # fallback model automatically. Set to false to disable.
   refusal_fallbacks: true
@@ -41,6 +59,7 @@ llm:
   max_doc_chars:
     triage: 6000
     brief: 40000
+    research_facts: 60000
 
 pipeline:
   db_path: data/finmedia.db

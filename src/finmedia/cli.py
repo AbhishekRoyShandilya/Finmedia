@@ -93,9 +93,37 @@ def cmd_costs(args) -> None:
     total = store.month_spend(month)
     print(f"Month {month}: spent ₹{total:,.0f} of ₹{budget['monthly_cap_inr']:,} cap "
           f"(LLM ₹{store.month_spend(month, 'llm'):,.2f} of ₹{budget['llm_cap_inr']:,}); "
-          f"LLM budget left ₹{max(guard.remaining_llm_inr(month), 0):,.2f}")
+          f"LLM budget left ₹{max(guard.remaining_llm_inr(month), 0):,.2f}; research desk "
+          f"₹{store.month_spend(month, 'llm_research'):,.2f} of ₹{budget.get('research_llm_cap_inr', 0):,}")
     for row in store.month_breakdown(month):
         print(f"  {row['kind']:<12} {row['item']:<40} calls={row['calls']:<4} ₹{row['inr']:,.2f}")
+
+
+def cmd_research(args) -> None:
+    from .research.pipeline import estimate_inr, read_docs, run_research
+    from .tools.ptis import PtisBridge
+
+    store = pipeline.open_store()
+    llm = pipeline.make_llm(store)
+    doc_chars = len(read_docs(args.docs, int(llm.cfg["max_doc_chars"]["research_facts"]))) if args.docs else 0
+    est = estimate_inr(llm.guard, settings(), doc_chars)
+    print(f"Worst-case cost of this report: ₹{est['total']:,.0f} (research budget left "
+          f"₹{est['research_budget_left']:,.0f}). Typical spend is well below the worst case.")
+    if args.estimate_only:
+        _print(est)
+        return
+    res = run_research(args.topic, args.asof, llm, PtisBridge(), store=store, docs=args.docs,
+                       sectors=args.sectors.split(",") if args.sectors else None, out_dir=args.out)
+    flags = [k for k, v in res["verification"].items() if v.get("flagged")]
+    _print({"run_id": res.get("run_id"), "paths": res["paths"], "sectors": res["sectors_studied"],
+            "verification_flags": flags, "public_lint_hits": res["paths"].get("public_lint_hits")})
+
+
+def cmd_research_postmortem(args) -> None:
+    from .research.pipeline import score_claims
+    from .tools.ptis import PtisBridge
+
+    _print(score_claims(pipeline.open_store(), PtisBridge(), args.today))
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -154,6 +182,19 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--inr", type=float, help="amount in rupees")
     s.add_argument("--month", help="YYYY-MM (default: current month)")
     s.set_defaults(func=cmd_costs)
+
+    s = sub.add_parser("research", help="Deep Research Desk: multi-analyst sector study (paid; needs the PTIS bridge)")
+    s.add_argument("topic", help='e.g. "Union Budget 2026"')
+    s.add_argument("--asof", required=True, help="report date YYYY-MM-DD; nothing after it is used")
+    s.add_argument("--docs", nargs="*", default=[], help="primary documents (PDF/TXT/MD), e.g. the budget speech")
+    s.add_argument("--sectors", help="comma-separated sector names (overrides the scoper)")
+    s.add_argument("--out", default="output/research")
+    s.add_argument("--estimate-only", action="store_true", help="print the cost estimate and stop")
+    s.set_defaults(func=cmd_research)
+
+    s = sub.add_parser("research-postmortem", help="score claims-ledger rows whose horizon has passed")
+    s.add_argument("--today", default=date.today().isoformat())
+    s.set_defaults(func=cmd_research_postmortem)
     return p
 
 

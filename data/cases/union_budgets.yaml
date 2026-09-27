@@ -1,0 +1,55 @@
+# Union Budget case library - the analogue set for the fiscal/policy playbook.
+#
+# DATES verified 2026-09-27 against two independent checks:
+#   1. published lists (Wikipedia "Union budget of India"; indiabudget.gov.in speech PDFs; official announcements
+#      for 2024-07-23 and 2004-02-03 - the Wikipedia list had 2024-07-22 and 2004-02-04, both WRONG);
+#   2. the PTIS all-NSE panel: every date is a trading session, including the Saturday / Sunday special
+#      sessions NSE opens only for budgets (1999, 2015, 2020, 2025, 2026).
+# Not yet included: the 1998-03-25 interim budget (unverified).
+#
+# session: the NSE session on which the speech landed (speeches start ~11:00 IST, so the budget day's close
+# already contains the reaction; event studies measure from the PREVIOUS close).
+# tags: sector-level announcements, to be proposed by the Case Extractor from the budget speech (with quotes)
+# and APPROVED by a human (gate G1). Empty until approved - only approved tags may feed analogue selection.
+
+source_notes:
+  - https://en.wikipedia.org/wiki/Union_budget_of_India
+  - https://www.indiabudget.gov.in/doc/bspeech/bs200405(I).pdf
+  - https://www.businesstoday.in/union-budget/story/union-budget-2024-nirmala-sitharaman-to-present-budget-on-july-23-session-to-begin-from-july-22-436120-2024-07-06
+
+budgets:
+  - {date: 1997-02-28, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 1998-06-01, type: full, fm: Yashwant Sinha, session: weekday, tags: []}
+  - {date: 1999-02-27, type: full, fm: Yashwant Sinha, session: saturday_special, tags: []}
+  - {date: 2000-02-29, type: full, fm: Yashwant Sinha, session: weekday, tags: []}
+  - {date: 2001-02-28, type: full, fm: Yashwant Sinha, session: weekday, tags: []}
+  - {date: 2002-02-28, type: full, fm: Yashwant Sinha, session: weekday, tags: []}
+  - {date: 2003-02-28, type: full, fm: Jaswant Singh, session: weekday, tags: []}
+  - {date: 2004-02-03, type: interim, fm: Jaswant Singh, session: weekday, tags: []}
+  - {date: 2004-07-08, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2005-02-28, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2006-02-28, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2007-02-28, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2008-02-29, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2009-02-16, type: interim, fm: Pranab Mukherjee, session: weekday, tags: []}
+  - {date: 2009-07-06, type: full, fm: Pranab Mukherjee, session: weekday, tags: []}
+  - {date: 2010-02-26, type: full, fm: Pranab Mukherjee, session: weekday, tags: []}
+  - {date: 2011-02-28, type: full, fm: Pranab Mukherjee, session: weekday, tags: []}
+  - {date: 2012-03-16, type: full, fm: Pranab Mukherjee, session: weekday, tags: []}
+  - {date: 2013-02-28, type: full, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2014-02-17, type: interim, fm: P. Chidambaram, session: weekday, tags: []}
+  - {date: 2014-07-10, type: full, fm: Arun Jaitley, session: weekday, tags: []}
+  - {date: 2015-02-28, type: full, fm: Arun Jaitley, session: saturday_special, tags: []}
+  - {date: 2016-02-29, type: full, fm: Arun Jaitley, session: weekday, tags: []}
+  - {date: 2017-02-01, type: full, fm: Arun Jaitley, session: weekday, tags: []}
+  - {date: 2018-02-01, type: full, fm: Arun Jaitley, session: weekday, tags: []}
+  - {date: 2019-02-01, type: interim, fm: Piyush Goyal, session: weekday, tags: []}
+  - {date: 2019-07-05, type: full, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2020-02-01, type: full, fm: Nirmala Sitharaman, session: saturday_special, tags: []}
+  - {date: 2021-02-01, type: full, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2022-02-01, type: full, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2023-02-01, type: full, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2024-02-01, type: interim, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2024-07-23, type: full, fm: Nirmala Sitharaman, session: weekday, tags: []}
+  - {date: 2025-02-01, type: full, fm: Nirmala Sitharaman, session: saturday_special, tags: []}
+  - {date: 2026-02-01, type: full, fm: Nirmala Sitharaman, session: sunday_special, tags: []}

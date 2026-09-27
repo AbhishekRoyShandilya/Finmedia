@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import threading
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator
@@ -56,6 +57,26 @@ CREATE TABLE IF NOT EXISTS cost_ledger (
     usd REAL DEFAULT 0,
     inr REAL NOT NULL
 );
+CREATE TABLE IF NOT EXISTS research_runs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    topic TEXT NOT NULL,
+    asof TEXT NOT NULL,             -- the report date; nothing after it was used
+    created_at TEXT NOT NULL,
+    result_json TEXT NOT NULL,      -- scope, facts, quant pack, personas, skeptic, CIO, verification
+    internal_path TEXT,
+    public_path TEXT
+);
+CREATE TABLE IF NOT EXISTS claims (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id INTEGER NOT NULL REFERENCES research_runs(id),
+    asof TEXT NOT NULL,
+    target TEXT NOT NULL,           -- sector:<name> or stock:<sym>
+    direction TEXT NOT NULL,        -- positive | negative | neutral | mixed
+    horizon TEXT NOT NULL,
+    confidence TEXT NOT NULL,
+    source TEXT NOT NULL,           -- cio | persona:<name>
+    outcome_json TEXT               -- filled by research-postmortem
+);
 """
 
 
@@ -63,7 +84,9 @@ class Store:
     def __init__(self, db_path: Path | str):
         self.path = Path(db_path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.conn = sqlite3.connect(self.path)
+        # The research desk runs its persona panel in threads; they share this connection under one lock.
+        self.conn = sqlite3.connect(self.path, check_same_thread=False)
+        self.lock = threading.RLock()
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
 
@@ -170,11 +193,47 @@ class Store:
         row = self.conn.execute("SELECT brief_json FROM briefs WHERE document_id = ?", (doc_id,)).fetchone()
         return json.loads(row["brief_json"]) if row else None
 
+    # ------------------------------------------------------ research desk
+
+    def save_research_run(self, topic: str, asof: str, result: dict[str, Any],
+                          internal_path: str | None, public_path: str | None) -> int:
+        cur = self.conn.execute(
+            """INSERT INTO research_runs (topic, asof, created_at, result_json, internal_path, public_path)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (topic, asof, datetime.now().isoformat(), json.dumps(result, ensure_ascii=False, default=str),
+             internal_path, public_path),
+        )
+        self.conn.commit()
+        return int(cur.lastrowid)
+
+    def add_claims(self, run_id: int, asof: str, rows: list[dict[str, Any]]) -> None:
+        self.conn.executemany(
+            """INSERT INTO claims (run_id, asof, target, direction, horizon, confidence, source)
+               VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            [(run_id, asof, r["target"], r["direction"], r["horizon"], r["confidence"], r["source"]) for r in rows],
+        )
+        self.conn.commit()
+
+    def claims(self, unscored_only: bool = False) -> list[sqlite3.Row]:
+        sql = "SELECT * FROM claims" + (" WHERE outcome_json IS NULL" if unscored_only else "") + " ORDER BY id"
+        return list(self.conn.execute(sql))
+
+    def set_claim_outcome(self, claim_id: int, outcome: dict[str, Any]) -> None:
+        self.conn.execute("UPDATE claims SET outcome_json = ? WHERE id = ?",
+                          (json.dumps(outcome, ensure_ascii=False, default=str), claim_id))
+        self.conn.commit()
+
     # --------------------------------------------------------- cost ledger
 
     def add_cost(self, *, month: str, kind: str, item: str, inr: float, usd: float = 0.0,
                  input_tokens: int = 0, output_tokens: int = 0,
                  cache_write_tokens: int = 0, cache_read_tokens: int = 0) -> None:
+        with self.lock:
+            self._add_cost(month, kind, item, inr, usd, input_tokens, output_tokens, cache_write_tokens,
+                           cache_read_tokens)
+
+    def _add_cost(self, month, kind, item, inr, usd, input_tokens, output_tokens, cache_write_tokens,
+                  cache_read_tokens) -> None:
         self.conn.execute(
             """INSERT INTO cost_ledger (month, created_at, kind, item, input_tokens, output_tokens,
                cache_write_tokens, cache_read_tokens, usd, inr)
@@ -190,7 +249,8 @@ class Store:
         if kind:
             sql += " AND kind = ?"
             params.append(kind)
-        return float(self.conn.execute(sql, params).fetchone()["total"])
+        with self.lock:
+            return float(self.conn.execute(sql, params).fetchone()["total"])
 
     def month_breakdown(self, month: str) -> list[sqlite3.Row]:
         return list(

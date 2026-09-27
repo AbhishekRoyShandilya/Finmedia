@@ -70,20 +70,30 @@ class BudgetGuard:
         )
         return self.to_inr(self.usd_for(model, est))
 
-    def remaining_llm_inr(self, month: str | None = None) -> float:
+    @staticmethod
+    def pool_for(role: str | None) -> str:
+        """Research-desk roles spend from their own pool, so a deep report can never eat the media budget."""
+        return "llm_research" if role and role.startswith("research_") else "llm"
+
+    def remaining_llm_inr(self, month: str | None = None, pool: str = "llm") -> float:
         month = month or month_key()
+        if pool == "llm_research":
+            return float(self.budget["research_llm_cap_inr"]) - self.store.month_spend(month, "llm_research")
         llm_left = float(self.budget["llm_cap_inr"]) - self.store.month_spend(month, "llm")
-        total_left = float(self.budget["monthly_cap_inr"]) - self.store.month_spend(month)
+        media_spend = self.store.month_spend(month) - self.store.month_spend(month, "llm_research")
+        total_left = float(self.budget["monthly_cap_inr"]) - media_spend
         return min(llm_left, total_left)
 
-    def check(self, model: str, prompt_chars: int, max_output_tokens: int) -> float:
+    def check(self, model: str, prompt_chars: int, max_output_tokens: int, role: str | None = None) -> float:
         """Raise BudgetExceeded unless the worst case of this call fits the budget."""
+        pool = self.pool_for(role)
         worst = self.worst_case_inr(model, prompt_chars, max_output_tokens)
-        left = self.remaining_llm_inr()
+        left = self.remaining_llm_inr(pool=pool)
         if worst > left:
+            cap = (f"research cap ₹{self.budget['research_llm_cap_inr']}" if pool == "llm_research" else
+                   f"LLM cap ₹{self.budget['llm_cap_inr']}, total cap ₹{self.budget['monthly_cap_inr']}")
             raise BudgetExceeded(
-                f"Call could cost up to ₹{worst:.2f} but only ₹{max(left, 0):.2f} is left this month "
-                f"(LLM cap ₹{self.budget['llm_cap_inr']}, total cap ₹{self.budget['monthly_cap_inr']})."
+                f"Call could cost up to ₹{worst:.2f} but only ₹{max(left, 0):.2f} is left this month ({cap})."
             )
         return worst
 
@@ -91,7 +101,7 @@ class BudgetGuard:
         usd = self.usd_for(model, usage)
         inr = self.to_inr(usd)
         self.store.add_cost(
-            month=month_key(), kind="llm", item=f"{item}:{model}", inr=inr, usd=usd,
+            month=month_key(), kind=self.pool_for(item), item=f"{item}:{model}", inr=inr, usd=usd,
             input_tokens=usage.input_tokens, output_tokens=usage.output_tokens,
             cache_write_tokens=usage.cache_write_tokens, cache_read_tokens=usage.cache_read_tokens,
         )
