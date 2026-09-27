@@ -4,6 +4,8 @@
 
 ---
 
+> **Update (27 Sep 2026):** launch order is **Instagram Reels first, YouTube later**. See [`instagram-first-launch.md`](instagram-first-launch.md).
+
 ## 0. TL;DR
 
 1. **The idea is validated by this week's news.** IRDAI published its consultation paper *"Recalibrating Economics of Insurance Distribution"* on **23 Sep 2026**. On 24 Sep, PB Fintech fell **up to 36%** to a 52-week low of ₹1,210, then fell another ~5% on 25 Sep. Management itself estimated a **60–70% cut to health-business NPV**. You had a whole evening to analyze it before the market opened. That evening is the product.

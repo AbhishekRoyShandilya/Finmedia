@@ -18,6 +18,8 @@ You record **once** (a 1–2 day session to create your digital twin: face + voi
 
 ---
 
+**Launch order (27 Sep 2026):** Instagram Reels first, YouTube once Reels gain reach. Every output must also carry the "visible effort" signals both platforms reward. See [`instagram-first-launch.md`](instagram-first-launch.md) §1–§3.
+
 ## 1. Why this design (and not a 100% talking avatar)
 
 | Decision | Reason |

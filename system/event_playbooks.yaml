@@ -225,7 +225,7 @@ playbooks:
 
   - id: market_structure_flows
     name: Market structure & mechanical flows
-    examples: [index inclusion/exclusion, MSCI/FTSE rebalance, F&O rule changes, lock-in expiry, IPO supply]
+    examples: [index inclusion/exclusion, MSCI/FTSE rebalance, F&O rule changes, expiry-day changes, closing auction (CAS), lock-in expiry, IPO supply]
     event_types: [structure.index_change, structure.fo_rules, structure.lockin_expiry, structure.ipo_supply]
     horizon: H0-H2
     scheduled: true

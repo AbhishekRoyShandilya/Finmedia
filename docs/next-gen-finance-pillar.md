@@ -269,6 +269,11 @@ Quality bar for every episode (publish only if it passes at least 3 of 4):
 - *What happens to brokers when trading is free and AI is the advisor?*
 - *T+0, 24×7, tokenized: what Indian markets look like in 2030*
 
+### Series 7: "Strategy Reality Check" (added 27 Sep 2026)
+- *पुरानी Strategy, नया Market*: why 2022–23 strategies fail now. Many of the rules they relied on no longer exist (BankNifty weekly expiry, Thursday expiry, small lot sizes, closing VWAP).
+- *5-Minute Strategy Test*: a 10-question checklist to test any strategy seen online.
+- Full plan, dated rule changes and guardrails: [`instagram-first-launch.md`](instagram-first-launch.md) §4.
+
 ### Reels translation (per episode)
 - **Hook:** the single most surprising number ("₹61,000 crore lost, ₹61,000 crore made").
 - **Visual:** money flowing from a crowd of phones to a server rack.

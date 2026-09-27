@@ -64,6 +64,8 @@ That one rule separates us from creators whose videos *sound* deep but can't be 
 | D7 | **Borderless Portfolios**: GIFT City, LRS | RBI LRS rules, IFSCA circulars, tax treatment | Currency and diversification history | E |
 | D8 | **Investor 2030 / Future Trader** | Regulatory roadmaps, global precedents | Past structural shifts and who won them | E |
 | D9 | **Skills & Careers** | Hiring data, role requirements | — | E |
+| D10 | **पुरानी Strategy, नया Market**: why 2022–23 strategies fail now | SEBI/NSE/BSE circulars and Finance Act changes with exact effective dates; exchange turnover and participation data | Before/after each rule change: turnover, retail participation, strategy behaviour | E |
+| D11 | **5-Minute Strategy Test**: how to test any strategy seen online | The 10-question checklist; cost calculator (brokerage, STT, fees, slippage); SEBI enforcement examples | Backtests with costs across rule regimes | E (never name specific influencers) |
 
 ### E. Personal wealth systems
 
