@@ -52,6 +52,16 @@ class PtisBridge:
     def sector_state(self, sector: str, asof: str) -> dict:
         return self._get("/sector_state", sector=sector, asof=asof)
 
+    def sector_series(self, sector: str, asof: str, start: str = "2015-01-01") -> dict:
+        return self._get("/sector_series", sector=sector, asof=asof, start=start)
+
+    def reachable(self) -> bool:
+        try:
+            self.meta()
+            return True
+        except BridgeError:
+            return False
+
     def event_study(self, events: list[str], asof: str, sectors: list[str] | None = None,
                     horizons: tuple[int, ...] = (1, 5, 20, 60), condition: bool = True,
                     syms: list[str] | None = None) -> dict:

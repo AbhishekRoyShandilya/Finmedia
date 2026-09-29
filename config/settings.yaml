@@ -61,6 +61,48 @@ llm:
     brief: 40000
     research_facts: 60000
 
+agent:
+  # Who runs the lead researcher, the analyst panel and the content writers.
+  #   anthropic      - Claude (key: ANTHROPIC_API_KEY)
+  #   openai_compat  - any OpenAI-compatible chat API with tool calling: Groq, OpenAI, OpenRouter, Together,
+  #                    a local Ollama... (key: OPENAI_COMPAT_API_KEY; set base_url and models below)
+  #   demo           - no LLM: a scripted walk-through that calls real tools, to check the whole app works.
+  #                    Its output is NOT research.
+  provider: anthropic
+  anthropic:
+    models:
+      research_lead: claude-opus-5-5
+      research_panel: claude-opus-5-5
+      content_writer: claude-opus-5-5
+    effort: {research_lead: high, research_panel: high, content_writer: high}
+  openai_compat:
+    base_url: https://api.groq.com/openai/v1
+    models:
+      research_lead: openai/gpt-oss-120b
+      research_panel: openai/gpt-oss-120b
+      content_writer: openai/gpt-oss-120b
+    # USD per 1M tokens (input, output) for the models above, for the budget guard. Update to your provider.
+    prices_usd_per_mtok:
+      openai/gpt-oss-120b: [0.15, 0.75]
+  max_tokens: {research_lead: 8000, research_panel: 4000, content_writer: 8000}
+  # Research depth presets: tool-using steps and a hard rupee cap per run (on top of the monthly research cap).
+  depth:
+    quick: {max_steps: 12, budget_inr: 150}
+    standard: {max_steps: 25, budget_inr: 400}
+    deep: {max_steps: 45, budget_inr: 1000}
+  tool_result_chars: 6000        # a tool result longer than this is cut in the model's context (kept in full in the log)
+  parallel_tools: 4
+
+server:
+  host: 127.0.0.1
+  port: 8020
+
+collectors:
+  enabled: true                  # the web server runs due collectors in the background
+  default_interval_min: 60
+  postmortem_hour: 18            # score due claims once a day after this local hour
+  alert_after_failures: 3        # Telegram alert when a source fails this many times in a row
+
 pipeline:
   db_path: data/finmedia.db
   output_dir: output

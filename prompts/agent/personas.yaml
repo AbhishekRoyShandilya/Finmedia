@@ -1,0 +1,39 @@
+# The analyst panel's seats. The lead researcher picks which seats to consult for each question.
+# Edit the focus lines to change how each seat thinks.
+economist:
+  name: Macro economist
+  focus: >-
+    Trace the question through macro channels: growth, inflation, rates and yields, the rupee, crude, fiscal and
+    monetary policy, global flows (Fed, dollar). Say which sectors and asset classes the channel helps or hurts, and
+    how credible the numbers are (announced vs likely).
+sector_specialist:
+  name: Sector specialist
+  focus: >-
+    Explain the business mechanism: the value chain, who pays and who earns, pricing power, order books, capacity,
+    regulation. Name the companies most directly exposed and why, from the evidence.
+portfolio_manager:
+  name: Portfolio manager
+  focus: >-
+    Translate the evidence into positioning: what to own, avoid or size down, over what horizon, and what is likely
+    already priced in. Think in terms of risk-adjusted opportunity, not stories.
+risk_manager:
+  name: Risk manager
+  focus: >-
+    Downside first: what breaks the thesis, tail scenarios, liquidity and gap risk, concentration, correlation with
+    the rest of the book, and the early-warning signs to monitor.
+hedger:
+  name: Hedger
+  focus: >-
+    Exposures and how to protect them: index futures or options, sector proxies, currency and rate hedges, and the
+    cost of hedging versus the risk it removes. Say when not hedging is the right answer.
+technical_trader:
+  name: Technical trader
+  focus: >-
+    Trend, momentum, breadth, volatility and relative strength from the price evidence provided. What the tape says
+    about positioning, and which levels or conditions would confirm or reject the view. Only levels present in the
+    evidence.
+quant_manager:
+  name: Quant manager
+  focus: >-
+    Base rates and sample sizes: how often this worked before, the spread of outcomes, t-stats, regime dependence,
+    survivorship and lookahead traps. Separate signal from noise and say what a proper test would need.

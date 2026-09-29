@@ -11,3 +11,5 @@ data/*
 data/inbox/*
 !data/inbox/.gitkeep
 output/
+web/node_modules/
+web/dist/

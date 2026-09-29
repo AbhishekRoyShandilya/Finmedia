@@ -1,26 +1,36 @@
-# Document sources.
+# Document sources. The web app's background collectors fetch each enabled source every `interval_min` minutes
+# and store new items (append-only, with the time we first saw them = known_at).
 #
 # Types:
-#   rss   - RSS/Atom feed (fetched with feedparser)
-#   gdelt - GDELT DOC 2.0 API article list (global news, used for detection only)
-#   inbox - local folder; drop official PDFs / .txt / .md files here by hand
+#   rss               - RSS/Atom feed (feedparser)
+#   gdelt             - GDELT DOC 2.0 global news (detection only; max one request per 5 s)
+#   inbox             - local folder data/inbox/ (drop PDFs / .txt / .md, or upload them in the web app)
+#   nse_announcements - NSE corporate announcements (latest ~20 across all listed companies)
+#   nse_calendar      - NSE board-meeting / results calendar
 #
-# Before enabling a source in production, confirm the URL still works and
-# that the site's terms allow automated access. Some official sites block
-# cloud IP ranges; run the fetchers from your own machine or server.
+# Categories drive the research tools: regulator (primary), filing (primary), calendar, news (secondary),
+# news_signal (secondary), manual.
+#
+# Before enabling a source in production, confirm the URL works and that the site's terms allow automated
+# access. Some official sites block cloud IP ranges; run collectors from your own machine or an Indian server.
+# Checked working from this machine on 28 Sep 2026: NSE APIs, RBI, SEBI, PIB, US Fed, ET, Moneycontrol, Mint.
+# BSE's API refused scripted access (HTTP 403), so it is not listed.
 
 sources:
   - id: inbox
     type: inbox
     enabled: true
     category: manual
+    interval_min: 30
     note: Official documents saved by hand (circulars, consultation papers, filings).
 
+  # ---------------------------------------------------------------- regulators and central banks (primary)
   - id: sebi_rss
     type: rss
     enabled: true
     category: regulator
     regulator: SEBI
+    interval_min: 60
     url: https://www.sebi.gov.in/sebirss.xml
 
   - id: rbi_press_releases
@@ -28,6 +38,7 @@ sources:
     enabled: true
     category: regulator
     regulator: RBI
+    interval_min: 60
     url: https://www.rbi.org.in/pressreleases_rss.xml
 
   - id: rbi_notifications
@@ -35,11 +46,72 @@ sources:
     enabled: true
     category: regulator
     regulator: RBI
+    interval_min: 120
     url: https://www.rbi.org.in/notifications_rss.xml
+
+  - id: pib_releases          # PIB serves this feed in Hindi whatever the Lang parameter says (checked 28 Sep 2026)
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: GOI
+    interval_min: 120
+    url: https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3
+
+  - id: fed_press_all
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: US Fed
+    interval_min: 180
+    url: https://www.federalreserve.gov/feeds/press_all.xml
+
+  - id: fed_monetary
+    type: rss
+    enabled: true
+    category: regulator
+    regulator: US Fed
+    interval_min: 180
+    url: https://www.federalreserve.gov/feeds/press_monetary.xml
+
+  # ---------------------------------------------------------------- exchange filings (primary)
+  - id: nse_announcements
+    type: nse_announcements
+    enabled: true
+    category: filing
+    interval_min: 15
+
+  - id: nse_calendar
+    type: nse_calendar
+    enabled: true
+    category: calendar
+    interval_min: 720
+
+  # ---------------------------------------------------------------- news (secondary: find events, confirm elsewhere)
+  - id: et_markets
+    type: rss
+    enabled: true
+    category: news
+    interval_min: 30
+    url: https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms
+
+  - id: moneycontrol_business
+    type: rss
+    enabled: true
+    category: news
+    interval_min: 30
+    url: https://www.moneycontrol.com/rss/business.xml
+
+  - id: livemint_markets
+    type: rss
+    enabled: true
+    category: news
+    interval_min: 30
+    url: https://www.livemint.com/rss/markets
 
   - id: gdelt_india_markets
     type: gdelt
-    enabled: false          # enable once the regulator feeds are stable
+    enabled: false          # optional global news signal
     category: news_signal
+    interval_min: 120
     query: '(sebi OR "reserve bank of india" OR irdai OR nifty OR sensex) sourcecountry:IN'
     max_records: 50

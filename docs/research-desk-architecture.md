@@ -2,12 +2,9 @@
 
 *Written 27 Sep 2026. It records every decision taken while designing the Deep Research Desk, what is built, what is not, and the order of work. It extends [`intelligence-system-architecture.md`](intelligence-system-architecture.md) and supersedes it where they differ (see §2).*
 
-> **Status: ON HOLD by decision.** Work order agreed with the founder:
-> 1. Finish the Model 4 strategy work and its deployment (in the PTIS repo).
-> 2. Build Finmedia (this document).
-> 3. Complete and refine PTIS as a SaaS product.
->
-> Do not start new Finmedia build work before step 1 is done unless the founder says so.
+> **Status (28 Sep 2026): BUILT — the workspace runs end to end.** On the founder's instruction the build resumed
+> before Model 4's deployment finished. What remains is adding keys: an LLM provider (Claude or OpenAI-compatible)
+> and optionally FRED and web search. See §11 for what was built and what is still open.
 
 ---
 
@@ -254,3 +251,38 @@ Full report with sources: the founder's private "Finmedia Business Odds" page (a
 - the monthly research budget;
 - whether collectors run on the PC or a small cloud server;
 - whether to pay for a consensus-estimates source or start with options-implied expectations.
+
+## 11. Build of 28 Sep 2026 — the working workspace
+
+**What changed from the plan above.**
+- **SQLite with FTS5, not Postgres + pgvector.** Free, zero-setup, and the same schema can move later. Similarity
+  uses mechanism tags plus full-text search; no embedding API needed.
+- **The workspace is Finmedia's own web app (phase 2) from day one,** because the founder asked for the chat UI. The
+  same tools are also exposed over MCP (`finmedia mcp`) for Claude Code / Desktop (phase 1).
+- **Any LLM.** `agent.provider` = `anthropic` (Claude), `openai_compat` (Groq, OpenAI, OpenRouter, Together, local
+  Ollama) or `demo` (no key; scripted walk-through over real tools, for testing).
+
+**Built and tested (51 tests, no network, no paid calls):**
+
+| Part | Where | Notes |
+|---|---|---|
+| Lead researcher agent | `agent/lead.py` | Tool loop; live events; steer mid-run; stop; step and rupee caps per depth; forced submission at the limit; follow-ups revise the object; interrupted histories repaired |
+| 26 tools + submit | `agent/tools.py` | Memory (4), primary sources (8: RBI/SEBI/PIB/Fed feeds, NSE announcements / results / XBRL figures / calendar / actions / shareholding, documents by URL), data (FRED, World Bank), secondary (news, GDELT, web search), PTIS quant (6), F&O cost, analyst panel (7 seats), red team, budget playbook |
+| Provenance check | `agent/provenance.py` | Numbers must appear in the run's tool results; evidence refs must exist; source URLs must have been fetched. One chance to fix, then saved as `flagged` |
+| Research Objects | `agent/objects.py` | Versioned; claims to the ledger with directional markers; memory updates (skipped for time-travel runs); older content marked stale |
+| Research memory | `memory.py` | Typed, append-only, point-in-time (`known_at`), supersede-not-overwrite, tag similarity, document search |
+| Collectors | `collectors.py` | 12 sources checked live on 28 Sep 2026 (BSE refuses scripted access); health, failure streaks, Telegram alert, daily claim scoring |
+| Content engine | `content/` | YouTube, Reel, carousel, newsletter from one object; numbers must be in the object; compliance items (directional views, named stocks, promise words) require a compliance/RA sign-off; editor-only approval when none; publish record |
+| Web app | `web/` + `server/app.py` | Research chat with live timeline, library, content studio, memory, sources, scoreboard, settings (keys and tools status), optional app token |
+
+**Still open (founder decisions or later milestones):**
+- Keys: an LLM key (and choice of provider), FRED, one web-search key.
+- Confirm the monthly research budget (₹12,000 placeholder) and the per-depth run caps.
+- **No live LLM run has been made yet**, so the agent's research quality is untested. Before trusting it:
+  1. run a few questions at `quick` depth;
+  2. read the evidence logs;
+  3. tune `prompts/agent/*.md`.
+- The Anthropic and OpenAI-compatible paths are tested against mocked responses only.
+- Case Extractor for budget sector tags (G1), expectations/consensus source, video layer, publishing APIs.
+- Hosting: collectors only run while `finmedia serve` is running on this PC. A small Indian server is needed for
+  24x7 collection.

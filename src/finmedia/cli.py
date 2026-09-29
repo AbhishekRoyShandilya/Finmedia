@@ -126,9 +126,102 @@ def cmd_research_postmortem(args) -> None:
     _print(score_claims(pipeline.open_store(), PtisBridge(), args.today))
 
 
+def cmd_serve(args) -> None:
+    import uvicorn
+
+    from .server.app import create_app
+
+    cfg = settings()
+    host = args.host or cfg.get("server", {}).get("host", "127.0.0.1")
+    port = args.port or int(cfg.get("server", {}).get("port", 8020))
+    print(f"Finmedia Research Desk on http://{host}:{port}  (Ctrl+C to stop)")
+    uvicorn.run(create_app(provider=args.provider, start_scheduler=not args.no_collectors), host=host, port=port,
+                log_level="warning")
+
+
+def cmd_ask(args) -> None:
+    """Run the lead researcher from the terminal and print its timeline."""
+    from .ai import AI
+    from .env import load_env
+    from .runs import RunManager
+
+    load_env()
+    store = pipeline.open_store()
+    cfg = settings()
+    mgr = RunManager(store, cfg, lambda: AI(store, cfg, provider_name=args.provider))
+    q = mgr.bus
+    printed: set[int] = set()
+
+    def show(ev) -> None:
+        d = ev["data"]
+        t = ev["type"]
+        if t == "assistant" and d.get("text"):
+            print(f"\n[{d['step']}] {d['text']}")
+        elif t == "tool_call":
+            print(f"   -> {d['name']} {json.dumps(d['args'], ensure_ascii=False)[:140]}")
+        elif t == "tool_result":
+            print(f"   <- {d['ref']} {d['name']} {'ok' if d['ok'] else 'FAILED'} {d.get('count') or ''}")
+        elif t in ("warning", "provenance", "object", "done", "failed", "stopped"):
+            print(f"== {t}: {json.dumps(d, ensure_ascii=False)[:400]}")
+
+    started = mgr.start_research(args.question, thread_id=args.thread, asof=args.asof, depth=args.depth)
+    rid = started["run_id"]
+    sub = q.subscribe(rid)
+    for ev in q.history(rid):
+        printed.add(ev["seq"])
+        show(ev)
+    while True:
+        ev = sub.get()
+        if ev["seq"] in printed:
+            continue
+        show(ev)
+        if ev["type"] in ("done", "failed", "stopped"):
+            break
+    worker = mgr._threads.get(rid)
+    if worker is not None:
+        worker.join(timeout=30)          # let the run row finish saving before the process exits
+    print(f"\nconversation {started['thread_id']}: continue with  finmedia ask --thread {started['thread_id']} \"...\"")
+
+
+def cmd_collect(args) -> None:
+    from . import collectors
+
+    store = pipeline.open_store()
+    for r in collectors.run_due(store, force=args.all):
+        print(f"{r['source']:<24} " + (f"{r['new']} new of {r['fetched']}" if r["ok"] else f"FAILED {r['error']}"))
+
+
+def cmd_mcp(args) -> None:
+    from .mcp_server import serve
+
+    serve()
+
+
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="finmedia", description="Research-to-Reel pipeline")
+    p = argparse.ArgumentParser(prog="finmedia", description="Finmedia research desk and content pipeline")
     sub = p.add_subparsers(dest="command", required=True)
+
+    s = sub.add_parser("serve", help="run the web workspace (research chat, library, content, memory, sources)")
+    s.add_argument("--host")
+    s.add_argument("--port", type=int)
+    s.add_argument("--provider", choices=["anthropic", "openai_compat", "demo"], help="override agent.provider")
+    s.add_argument("--no-collectors", action="store_true", help="do not run background collectors")
+    s.set_defaults(func=cmd_serve)
+
+    s = sub.add_parser("ask", help="ask the lead researcher from the terminal (paid unless --provider demo)")
+    s.add_argument("question")
+    s.add_argument("--thread", type=int, help="continue this conversation")
+    s.add_argument("--asof", help="time-travel: research as of YYYY-MM-DD")
+    s.add_argument("--depth", default="standard", choices=["quick", "standard", "deep"])
+    s.add_argument("--provider", choices=["anthropic", "openai_compat", "demo"])
+    s.set_defaults(func=cmd_ask)
+
+    s = sub.add_parser("collect", help="run due collectors once (or all with --all)")
+    s.add_argument("--all", action="store_true")
+    s.set_defaults(func=cmd_collect)
+
+    s = sub.add_parser("mcp", help="serve the research tools over MCP (stdio) for Claude Code / Desktop")
+    s.set_defaults(func=cmd_mcp)
 
     s = sub.add_parser("ingest", help="fetch documents and run the pre-filter")
     s.add_argument("--source", help="only this source id from config/sources.yaml")

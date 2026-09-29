@@ -46,9 +46,26 @@ def parse_feed(raw: str | bytes, source: dict[str, Any]) -> list[Document]:
     return _to_documents(feedparser.parse(raw), source)
 
 
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/126.0 Safari/537.36")
+
+
 def fetch_rss(source: dict[str, Any]) -> list[Document]:
-    """Download and parse a feed URL."""
-    feed = feedparser.parse(source["url"], agent=USER_AGENT)
+    """Download (browser-like headers; several Indian sites serve an HTML page to bots) and parse a feed URL."""
+    import httpx
+
+    try:
+        r = httpx.get(source["url"], timeout=30, follow_redirects=True,
+                      headers={"User-Agent": BROWSER_UA, "Accept": "application/rss+xml, application/xml, text/xml, */*"})
+    except httpx.HTTPError as exc:
+        raise ConnectionError(f"{source['id']}: download failed ({type(exc).__name__}: {exc})") from exc
+    if r.status_code >= 400:
+        raise ConnectionError(f"{source['id']}: HTTP {r.status_code}")
+    raw = r.content.lstrip(b"\xef\xbb\xbf").lstrip()        # a UTF-8 byte-order mark breaks some parsers
+    feed = feedparser.parse(raw)
+    if not feed.entries:
+        # retry with the text decoded by httpx (fixes wrong charset declarations)
+        feed = feedparser.parse(r.text.lstrip("﻿").lstrip())
     if getattr(feed, "bozo", False) and not feed.entries:
         raise ConnectionError(f"{source['id']}: could not read feed ({feed.get('bozo_exception')})")
     return _to_documents(feed, source)
